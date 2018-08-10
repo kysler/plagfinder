@@ -203,10 +203,11 @@ instructor.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back
 instructor.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Signout" ) )
 
 @app.route( '/accounts/', methods=[ 'POST', 'GET' ] )
-def accounts():
+def accounts()
     return render_template('account.html')
 
 if __name__ == "__main__":
 	db.create_all()
 	app_dir = op.realpath ( os.path.dirname ( __file__ ) )
-	app.run(debug = True)
+	port = int(os.environ.get('PORT', 5000))
+	app.run(host='0.0.0.0', port=port, debug=True)
