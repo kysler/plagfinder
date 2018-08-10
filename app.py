@@ -29,9 +29,8 @@ try:
     os.mkdir(file_path)
 except OSError:
     pass
-app.config['DATABASE_FILE'] = 'sample_db.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + app.config['DATABASE_FILE']
-app.config['SQLALCHEMY_ECHO'] = True
+DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////flask_app.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 documents = UploadSet('documents', DOCUMENTS)
