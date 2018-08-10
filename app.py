@@ -105,7 +105,7 @@ def signup():
 
     if form.validate_on_submit():
         hashed_id = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(last_name=form.username.data, email=form.email.data, password=hashed_id)
+        new_user = User(last_name=form.username.data, email=form.email.data, password=hashed_id.decode("utf-8", "ignore"))
         db.session.add(new_user)
         db.session.commit()
 
