@@ -207,5 +207,6 @@ def accounts():
     return render_template('account.html')
 
 if __name__ == "__main__":
-    app_dir = op.realpath ( os.path.dirname ( __file__ ) )
-    app.run(debug = True)
+	db.create_all()
+	app_dir = op.realpath ( os.path.dirname ( __file__ ) )
+	app.run(debug = True)
