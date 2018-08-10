@@ -5,7 +5,6 @@ import ctypes
 import docx
 from fuzzywuzzy import fuzz, process
 import nltk
-import googleSearch
 
 #Function to call Cosine Similarity to gather results.
 def similar(a, b):
