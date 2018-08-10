@@ -203,7 +203,7 @@ instructor.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back
 instructor.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Signout" ) )
 
 @app.route( '/accounts/', methods=[ 'POST', 'GET' ] )
-def accounts()
+def accounts():
     return render_template('account.html')
 
 if __name__ == "__main__":
