@@ -53,7 +53,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Unicode(64))
     last_name = db.Column(db.Unicode(64))
-		password = db.Column(db.Unicode(64))
+    password = db.Column(db.Unicode(64))
     email = db.Column(db.Unicode(128), unique = True)
     phone = db.Column(db.Unicode(32))
     course = db.Column(db.Unicode(128))
