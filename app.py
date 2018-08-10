@@ -46,7 +46,6 @@ class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode(64))
     path = db.Column(db.Unicode(128))
-
     def __unicode__(self):
         return self.name
 
@@ -54,6 +53,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.Unicode(64))
     last_name = db.Column(db.Unicode(64))
+	password = db.Column(db.Unicode(64))
     email = db.Column(db.Unicode(128), unique = True)
     phone = db.Column(db.Unicode(32))
     course = db.Column(db.Unicode(128))
@@ -90,7 +90,7 @@ def login ( ):
     if form.validate_on_submit ( ):
         user = User.query.filter_by ( last_name=form.username.data ).first ( )
         if user:
-            if check_password_hash ( user.id, form.password.data ):
+            if check_password_hash ( user.password, form.password.data ):
                 login_user ( user, remember=form.remember.data )
                 return redirect ( url_for ( 'index' ) )
 
@@ -105,7 +105,7 @@ def signup():
 
     if form.validate_on_submit():
         hashed_id = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(last_name=form.username.data, email=form.email.data, id=hashed_id)
+        new_user = User(last_name=form.username.data, email=form.email.data, password=hashed_id)
         db.session.add(new_user)
         db.session.commit()
 
