@@ -1,0 +1,16 @@
+{
+  "name": "Plagfinder",
+  "description": "Plagfinder application",
+  "keywords": [
+    "flask",
+    "python",
+    "sample"
+  ],
+  "repository": "https://github.com/kysler/plagfinder",
+  "scripts": {
+    "postdeploy": "python -c 'from app import db; db.create_all()'"
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
+}

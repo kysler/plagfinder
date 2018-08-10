@@ -1,0 +1,56 @@
+{% if session['Logged_Admin'] or session['Logged_Instructor'] %}
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+<div class="panel panel-default">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <h1>PlagVoid</h1>
+            <p class="lead">
+                {% if session['Logged_Admin'] %}
+                 Admin Control Panel
+                {% else %}
+                Instructor Control Panel
+                {% endif %}
+            </p>
+            {% if session['Logged_Admin'] %}
+            <div class="col-md-2">
+                <img src="../static/dist/img/add.png">
+                <div class="color-swatches">
+                    <div class="clearfix">
+                        <div class="upload-btn-wrapper">
+                            <a href="/admin/Accounts" class="btn btn-primary" style="margin-bottom: 20px; margin-top: 10px;">User Management</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <img src="../static/dist/img/scan.png">
+                <div class="color-swatches">
+                    <div class="clearfix">
+                        <div class="upload-btn-wrapper">
+                            <a href="/admin/File" class="btn btn-primary" style="margin-bottom: 20px; margin-top: 10px;">File Management</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-md-2">
+                <img src="../static/dist/img/scan.png">
+                <div class="color-swatches">
+                    <div class="clearfix">
+                        <div class="upload-btn-wrapper">
+                            <a href="/instructor/Files" class="btn btn-primary" style="margin-bottom: 20px; margin-top: 10px;">File Management</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% else %}
+404 FORBIDDEN ACCESS
+{% endif %}

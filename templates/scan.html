@@ -1,0 +1,26 @@
+{% extends "login.html" %}
+{% block title %}NCST-PLAGVOID{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% if session['logged_in'] %}
+{% block content %}
+  <div class="login">
+  <div id="login-box">
+<div class="fl_left" style="padding :30px 0 0 70px;">
+    <h1 style="font-size: 25px; color: #333;">Upload a File.</h1>
+    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+    <input type=file name=file accept=".docx" class="btn">
+      <input type=submit class="btn">
+</div>
+  </form>
+     {% block items %}
+    {% endblock %}
+</div>
+  </div>
+
+
+{% endblock %}
+{% else %}
+404 FORBIDDEN
+{% endif %}

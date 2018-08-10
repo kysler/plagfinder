@@ -1,0 +1,4 @@
+{% if session['Logged_Admin'] or session['Logged_Instructor'] %}
+{% extends 'admin/model/edit.html' %}
+{% import 'rule_demo.html' as rule_demo %}
+{% endif %}
