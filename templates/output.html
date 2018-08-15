@@ -1,5 +1,5 @@
 {% extends "index.html" %}
-{% block title %}NCST-PLAGVOID{% endblock %}
+{% block title %}NCST-PLAGFINDER{% endblock %}
 {% block head %}
 {{ super() }}
 {% endblock %}
@@ -7,22 +7,15 @@
     <!-- container body --> 
     <!-- ########################################################################################## -->
 {% if not output  %}
-<div  class="fl_right" style="color: #333; padding :30px 150px 0 0;">
-<h3 style="margin-top: 0px;">Results:</h3><br>
-<ul class="Helvetica" style="font-size: 12px; text-align: left;">
   <li>The document submitted is apparent free from any plagiarized content!</li>
 </ul>
-</div>
 {% else %}
-<div  class="fl_right" style="color: #333; padding :30px 150px 0 0;">
   <h3 style="margin-top: 0px;">Copied Content Found:</h3><br>
 <ul class="Helvetica" style="font-size: 12px; text-align: left;">
   {% for cp in output %}
   <li>{{ cp }} </li>
 {% endfor %}
 </ul>
-		<center><a href="{{url_for('return_files_tut')}}"><button class='btn'>Download!</button></a><br>
-            <h4 style="font-size: 16px;">Download the .LOG file for Full Result</h4></center>
 </div>
 {% endif %}
 {% endblock %}
