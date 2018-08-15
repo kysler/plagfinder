@@ -2,7 +2,7 @@ from flask import Flask, url_for, render_template, request, redirect, session, s
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, DOCUMENTS
 from functools import wraps
-from plagscan import plagscan
+from googleSearch import googleSearch
 from flask_admin import Admin, form
 from flask_admin.form import rules
 from sqlalchemy.event import listens_for
@@ -135,9 +135,8 @@ def index():
 def upload():
     if request.method == 'POST' and 'files' in request.files:
         filename = documents.save ( request.files[ 'files' ] )
-        #output = plagscan('tmp/uploads/' + filename)
-        #return render_template('output.html', output = output)
-        return render_template ('index.html')
+        output = googleSearch('tmp/uploads/' + filename)
+        return render_template('output.html', output = output)
     else:
         return render_template ( 'index.html' )
 
