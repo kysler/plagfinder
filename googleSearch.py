@@ -1,22 +1,34 @@
 import urllib
+from nltk import tokenize
 from bs4 import BeautifulSoup
 import requests
+import glob
+import subprocess as sp
+import os
+import ctypes
+import docx
+import re
 import webbrowser
 
-text = "'Use Redirection Operators to Save a Command's Results to a File. ... Many Command Prompt commands, and DOS commands for that matter, are executed not just to do something, but to provide you with information.'"
-text = urllib.parse.quote_plus(text)
+def getText(filename):
+    doc = docx.Document(filename)
+    fullText = []
+    for para in doc.paragraphs:
+        fullText.append(para.text)
+    return fullText
 
-url = 'https://google.com/search?q=' + text
-
-response = requests.get(url)
-
-#with open('output.html', 'wb') as f:
-#    f.write(response.content)
-#webbrowser.open('output.html')
-links = []
-soup = BeautifulSoup(response.text, 'html.parser')
-link = soup.find('h3', attrs={'class' : 'r'})
-links.append(link.a['href'][7:])
-
-
-print(links)
+def googleSearch(uploaded_file):
+    uploaded = getText(uploaded_file)
+    text = ''.join(uploaded)
+    sentences = tokenize.sent_tokenize(text)
+    print(sentences)
+    links = []
+    for item in sentences:
+        item = urllib.parse.quote_plus ( item )
+        url = 'https://google.com/search?q=' + item
+        response = requests.get ( url )
+        soup = BeautifulSoup(response.text, 'html.parser')
+        link = soup.find('h3', attrs={'class' : 'r'})
+        links.append(link.a['href'][7:])
+    links.pop(0)
+    return links
