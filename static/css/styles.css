@@ -136,6 +136,7 @@ section h2 {
   position: absolute;
   top: 0;
   left: 0;
+
 }
 
 .btn-xl {
@@ -252,8 +253,8 @@ header.masthead h2 {
 
 @media (min-width: 992px) {
 section.masthead {
-  padding-top: 14.2%;
-  padding-bottom: 7.1%;
+  padding-top: 16.2%;
+  padding-bottom: 8.1%;
 }
   header.masthead h1 {
     font-size: 4.75em;
@@ -509,4 +510,22 @@ hr {
 }
 
 .files button:hover {background-color: #e7e7e7;}
+}
+
+.file-well button{
+ background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.bts {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 40px;
 }
