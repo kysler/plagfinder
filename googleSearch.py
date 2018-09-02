@@ -24,11 +24,10 @@ def googleSearch(uploaded_file):
     print(sentences)
     links = []
     for item in sentences:
-        item = urllib.parse.quote_plus ( item )
+        item = urllib.parse.quote_plus( item )
         url = 'https://google.com/search?q=' + item
         response = requests.get ( url )
         soup = BeautifulSoup(response.text, 'html.parser')
-        for g in soup.select(".r a"):
-            links.append(g.text)
-    links.pop(0)
+        for item in soup.find_all('h3', attrs={'class' : 'r'}):
+            links.append(item.a['href'][7:])
     return links
