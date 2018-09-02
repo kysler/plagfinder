@@ -118,11 +118,11 @@ def signup():
 @login_required
 def logout ( ):
     logout_user( )
-    return redirect ( url_for ( 'login' ) )
+    return redirect ( url_for ( 'index' ) )
 
 @app.route ( '/', methods=[ 'POST', 'GET' ] )
 def startpage ( ):
-    return redirect ( url_for ( 'login' ) )
+    return redirect ( url_for ( 'index' ) )
 
 @app.route ('/index', methods=['POST', 'GET'])
 @login_required
