@@ -21,13 +21,13 @@ def googleSearch(uploaded_file):
     uploaded = getText(uploaded_file)
     text = ''.join(uploaded)
     sentences = tokenize.sent_tokenize(text)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    response = requests.get ( url )
     print(sentences)
     links = []
     for item in sentences:
         item = urllib.parse.quote_plus ( item )
         url = 'https://google.com/search?q=' + item
-        response = requests.get ( url )
-        soup = BeautifulSoup(response.text, 'html.parser')
         link = soup.find('h3', attrs={'class' : 'r'})
         links.append(link.a['href'][7:])
     links.pop(0)
