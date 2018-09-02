@@ -28,7 +28,7 @@ def googleSearch(uploaded_file):
         url = 'https://google.com/search?q=' + item
         response = requests.get ( url )
         soup = BeautifulSoup(response.text, 'html.parser')
-        for g in soup.find('h3', attrs={'class' : 'r'}):
-            links.append(g.a['href'][7:])
+        for g in soup.select(".r a"):
+            links.append(g.text)
     links.pop(0)
     return links
