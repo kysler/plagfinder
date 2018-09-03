@@ -67,17 +67,17 @@ class User(db.Model, UserMixin):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
-    username = db.Column(db.String(255, collation='NOCASE'), nullable=False, unique=True)
-    email = db.Column(db.String(255, collation='NOCASE'), nullable=False, unique=True)
+    username = db.Column(db.String(255), nullable=False, unique=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
     email_confirmed_at = db.Column(db.DateTime())
     password = db.Column(db.String(255), nullable=False, server_default='')
 
 	# User information
-    first_name = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
-    last_name = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
-    school = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
-    course = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
-    roles = db.Column(db.String(100, collation='NOCASE'), server_default='Student')
+    first_name = db.Column(db.String(100), nullable=False, server_default='')
+    last_name = db.Column(db.String(100), nullable=False, server_default='')
+    school = db.Column(db.String(100), nullable=False, server_default='')
+    course = db.Column(db.String(100), nullable=False, server_default='')
+    roles = db.Column(db.String(100), server_default='Student')
 
     # Setup Flask-User and specify the User data-model
 user_manager = UserManager(app, db, User)
