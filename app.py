@@ -81,34 +81,8 @@ class User(db.Model, UserMixin):
     course = db.Column(db.String(100), nullable=False, server_default='')
     roles = db.Column(db.String(100), server_default='Student')
 
-
-class CustomRegisterForm(RegisterForm):
-    # Add a country field to the Register form
-    school = StringField(('school'), validators=[DataRequired()])
-    course = StringField(('course'), validators=[DataRequired()])
-
-class CustomRegisterForm(LoginForm):
-    # Add a country field to the Register form
-    school = StringField(('school'), validators=[DataRequired()])
-    course = StringField(('course'), validators=[DataRequired()])
-
-# Customize the User profile form:
-
-class CustomUserProfileForm(EditUserProfileForm):
-    # Add a country field to the UserProfile form
-    school = StringField(('school'), validators=[DataRequired()])
-    course = StringField(('course'), validators=[DataRequired()])
-    
-class CustomUserManager(UserManager):
-
-    def customize(self, app):
-        # Configure customized forms
-        self.RegisterFormClass = CustomRegisterForm
-        self.UserProfileFormClass = CustomUserProfileForm
-        self.LoginFormClass = CustomUserProfileForm
-    
     # Setup Flask-User and specify the User data-model
-user_manager = CustomUserManager(app, db, User)
+user_manager = UserManager(app, db, User)
 
 # Delete hooks for models, delete files if models are getting deleted
 @listens_for(File, 'after_delete')
