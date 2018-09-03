@@ -64,7 +64,7 @@ class File(db.Model):
         return self.name
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'user'
+    __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
     username = db.Column(db.String(255, collation='NOCASE'), nullable=False, unique=True)
