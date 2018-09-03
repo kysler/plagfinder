@@ -49,7 +49,6 @@ app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = True
 app.config['USER_ENABLE_USERNAME'] = True
 app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
-app.config['USER_APP_NAME'] = 'Flask-User Demo'
 app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'user.login'
 app.config.from_pyfile('config.cfg')
 
@@ -81,7 +80,6 @@ class User(db.Model, UserMixin):
     school = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
     course = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
 
-	# Define the relationship to Role via UserRoles
     roles = db.Column(db.String(100, collation='NOCASE'), server_default='Student')
 
     # Setup Flask-User and specify the User data-model
@@ -155,7 +153,7 @@ class FileView(sqla.ModelView):
 class UserView(sqla.ModelView):
     column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'course', 'roles')
     column_display_pk = True
-    form_columns = ('id', 'first_name', 'last_name', 'email', 'course', 'roles')
+    form_columns = ('first_name', 'last_name', 'email', 'course', 'roles')
     form_choices = {'course': [ ('Instructor', 'Instructor'), ('BSCS-SD', 'BSCS-SD'), ('BSCS-MGD', 'BSCS-MGD'), ('BSIT-SM', 'BSIT-SM'),
                                 ('BSIT-CNS', 'BSIT-CNS')],
                     'roles':[ ('Student', 'Student'), ('Admin', 'Admin'), ('Instructor', 'Instructor') ]}
