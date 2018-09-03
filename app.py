@@ -82,21 +82,7 @@ class User(db.Model, UserMixin):
     course = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
 
 	# Define the relationship to Role via UserRoles
-    roles = db.relationship('Role', secondary='user_roles')
-
-    # Define the Role data-model
-class Role(db.Model):
-    __tablename__ = 'roles'
-    id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(50), unique=True)
-
-    # Define the UserRoles association table
-class UserRoles(db.Model):
-    __tablename__ = 'user_roles'
-    id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey('users.id', ondelete='CASCADE'))
-    role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
-
+    roles = db.Column(db.String(100, collation='NOCASE'), server_default='Student')
 
     # Setup Flask-User and specify the User data-model
 user_manager = UserManager(app, db, User)
