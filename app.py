@@ -49,6 +49,7 @@ app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = True
 app.config['USER_ENABLE_USERNAME'] = True
 app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
+app.config['USER_APP_NAME'] = 'Flask-User Demo'
 app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'index'
 app.config.from_pyfile('config.cfg')
 
