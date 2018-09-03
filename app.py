@@ -3,10 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, DOCUMENTS
 from functools import wraps
 from googleSearch import googleSearch
-from flask_admin import Admin, form
 from flask_admin.form import rules
 from sqlalchemy.event import listens_for
-from flask_admin.contrib import sqla
 from jinja2 import Markup
 from flask_admin import Admin, form
 from flask_admin.form import rules
@@ -19,9 +17,14 @@ from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask import Flask 
+from flask_sqlalchemy import SQLAlchemy 
+from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter, roles_required
+from flask_mail import Mail
 import os
 import os.path as op
 
+# Create Flask App
 app = Flask ( __name__ )
 
 file_path = op.join(op.dirname(__file__), 'files')
@@ -29,10 +32,11 @@ try:
     os.mkdir(file_path)
 except OSError:
     pass
+
 DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////flask_app.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-db = SQLAlchemy(app)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
+
 documents = UploadSet('documents', DOCUMENTS)
 app.config['UPLOADED_DOCUMENTS_DEST'] = 'tmp/uploads'
 configure_uploads(app, documents)
@@ -40,6 +44,17 @@ bootstrap = Bootstrap(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+app.config['CSRF_ENABLED'] = True 
+app.config['USER_ENABLE_EMAIL'] = True
+app.config['USER_ENABLE_USERNAME'] = True
+app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
+app.config['USER_APP_NAME'] = 'Flask-User Demo'
+app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'user.login'
+app.config.from_pyfile('config.cfg')
+
+db = SQLAlchemy(app)
+mail = Mail(app)
 
 # Create models
 class File(db.Model):
@@ -49,15 +64,41 @@ class File(db.Model):
     def __unicode__(self):
         return self.name
 
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.Unicode(64))
-    last_name = db.Column(db.Unicode(64))
-    password = db.Column(db.Unicode(128))
-    email = db.Column(db.Unicode(128), unique = True)
-    phone = db.Column(db.Unicode(32))
-    course = db.Column(db.Unicode(128))
-    role = db.Column(db.Unicode(128))
+class User(db.Model, UserMixin):
+	__tablename__ = 'users'
+	id = db.Column(db.Integer, primary_key=True)
+	active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+
+	# User authentication information. The collation='NOCASE' is required
+	# to search case insensitively when USER_IFIND_MODE is 'nocase_collation'.
+	email = db.Column(db.String(255, collation='NOCASE'), nullable=False, unique=True)
+	email_confirmed_at = db.Column(db.DateTime())
+	password = db.Column(db.String(255), nullable=False, server_default='')
+
+	# User information
+	first_name = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
+	last_name = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
+	school = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
+	course = db.Column(db.String(100, collation='NOCASE'), nullable=False, server_default='')
+
+	# Define the relationship to Role via UserRoles
+	roles = db.relationship('Role', secondary='user_roles')
+
+    # Define the Role data-model
+class Role(db.Model):
+	__tablename__ = 'roles'
+	id = db.Column(db.Integer(), primary_key=True)
+ 	name = db.Column(db.String(50), unique=True)
+
+    # Define the UserRoles association table
+class UserRoles(db.Model):
+	__tablename__ = 'user_roles'
+	id = db.Column(db.Integer(), primary_key=True)
+	user_id = db.Column(db.Integer(), db.ForeignKey('users.id', ondelete='CASCADE'))
+	role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
+
+    # Setup Flask-User and specify the User data-model
+user_manager = UserManager(app, db, User)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -150,6 +191,7 @@ instructor = Admin( app, 'PlagVoid Instructor', url='/instructor', endpoint="ins
 
 # Administrative views
 class FileView(sqla.ModelView):
+	@roles_required('Admin')
     column_display_pk = True
     column_searchable_list = ('id','name','path')
     form_columns = ('id','name','path')
@@ -166,6 +208,7 @@ class FileView(sqla.ModelView):
     }
 
 class UserView(sqla.ModelView):
+	@roles_required('Admin')
     column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'phone', 'course', 'role')
     column_display_pk = True
     form_columns = ('id', 'first_name', 'last_name', 'email', 'phone', 'course', 'role')
@@ -174,6 +217,7 @@ class UserView(sqla.ModelView):
                     'role':[ ('Student', 'Student'), ('Admin', 'Admin'), ('Instructor', 'Instructor') ]}
 
 class FilesView(sqla.ModelView):
+	@roles_required('Instructor')
     column_display_pk = True
     can_delete = False
     # Pass additional parameters to 'path' to FileUploadField constructor
@@ -190,7 +234,6 @@ class FilesView(sqla.ModelView):
         }
     }
 
-
 # Add views
 admin.add_view ( FileView ( File, db.session, endpoint="File" ) )
 admin.add_view ( UserView ( User, db.session, name='User', endpoint="Accounts" ) )
@@ -199,10 +242,6 @@ admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout"
 instructor.add_view ( FilesView ( File, db.session, endpoint="Files" ) )
 instructor.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back to Index" ) )
 instructor.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Signout" ) )
-
-@app.route( '/accounts/', methods=[ 'POST', 'GET' ] )
-def accounts():
-    return render_template('account.html')
 
 if __name__ == "__main__":
 	db.create_all()
