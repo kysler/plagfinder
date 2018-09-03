@@ -167,12 +167,12 @@ class FileView(sqla.ModelView):
     }
 
 class UserView(sqla.ModelView):
-    column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'course', 'role')
+    column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'course', 'roles')
     column_display_pk = True
-    form_columns = ('id', 'first_name', 'last_name', 'email', 'course', 'role')
+    form_columns = ('id', 'first_name', 'last_name', 'email', 'course', 'roles')
     form_choices = {'course': [ ('Instructor', 'Instructor'), ('BSCS-SD', 'BSCS-SD'), ('BSCS-MGD', 'BSCS-MGD'), ('BSIT-SM', 'BSIT-SM'),
                                 ('BSIT-CNS', 'BSIT-CNS')],
-                    'role':[ ('Student', 'Student'), ('Admin', 'Admin'), ('Instructor', 'Instructor') ]}
+                    'roles':[ ('Student', 'Student'), ('Admin', 'Admin'), ('Instructor', 'Instructor') ]}
 
 class FilesView(sqla.ModelView):
     column_display_pk = True
