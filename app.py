@@ -105,7 +105,7 @@ class CustomUserManager(UserManager):
         # Configure customized forms
         self.RegisterFormClass = CustomRegisterForm
         self.UserProfileFormClass = CustomUserProfileForm
-	self.LoginFormClass = CustomUserProfileForm
+        self.LoginFormClass = CustomUserProfileForm
     
     # Setup Flask-User and specify the User data-model
 user_manager = CustomUserManager(app, db, User)
