@@ -46,7 +46,7 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 app.config['CSRF_ENABLED'] = True 
-app.config['USER_ENABLE_EMAIL'] = False
+app.config['USER_ENABLE_EMAIL'] = TRUE
 app.config['USER_ENABLE_USERNAME'] = True
 app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
 app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'user.login'
