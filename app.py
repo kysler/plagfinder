@@ -94,7 +94,7 @@ class CustomRegisterForm(LoginForm):
 
 # Customize the User profile form:
 
-class CustomUserProfileForm(UserProfileForm):
+class CustomUserProfileForm(EditUserProfileForm):
     # Add a country field to the UserProfile form
     school = StringField(('school'), validators=[DataRequired()])
     course = StringField(('course'), validators=[DataRequired()])
