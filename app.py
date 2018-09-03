@@ -80,7 +80,7 @@ class user(db.Model, UserMixin):
     roles = db.Column(db.String(100, collation='NOCASE'), server_default='Student')
 
     # Setup Flask-User and specify the User data-model
-user_manager = UserManager(app, db, User)
+user_manager = UserManager(app, db, user)
 
 # Delete hooks for models, delete files if models are getting deleted
 @listens_for(File, 'after_delete')
