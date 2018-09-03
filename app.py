@@ -170,7 +170,7 @@ class FilesView(sqla.ModelView):
 
 # Add views
 admin.add_view ( FileView ( File, db.session, endpoint="File" ) )
-admin.add_view ( UserView ( user, db.session, name='User', endpoint="Accounts" ) )
+admin.add_view ( UserView ( User, db.session, name='User', endpoint="Accounts" ) )
 admin.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back to Index" ) )
 admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout" ) )
 instructor.add_view ( FilesView ( File, db.session, endpoint="Files" ) )
