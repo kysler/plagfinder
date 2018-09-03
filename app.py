@@ -20,6 +20,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask import Flask 
 from flask_sqlalchemy import SQLAlchemy 
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter, roles_required
+from flask_user.forms import RegisterForm, UserProfileForm
 from flask_mail import Mail
 import os
 import os.path as op
@@ -80,8 +81,28 @@ class User(db.Model, UserMixin):
     course = db.Column(db.String(100), nullable=False, server_default='')
     roles = db.Column(db.String(100), server_default='Student')
 
+
+class CustomRegisterForm(RegisterForm):
+    # Add a country field to the Register form
+    school = StringField(_('school'), validators=[DataRequired()])
+    course = StringField(_('course'), validators=[DataRequired()])
+
+# Customize the User profile form:
+
+class CustomUserProfileForm(UserProfileForm):
+    # Add a country field to the UserProfile form
+    school = StringField(_('school'), validators=[DataRequired()])
+    course = StringField(_('course'), validators=[DataRequired()])
+    
+class CustomUserManager(UserManager):
+
+    def customize(self, app):
+        # Configure customized forms
+        self.RegisterFormClass = CustomRegisterForm
+        self.UserProfileFormClass = CustomUserProfileForm
+    
     # Setup Flask-User and specify the User data-model
-user_manager = UserManager(app, db, User)
+user_manager = CustomUserManager(app, db, User)
 
 # Delete hooks for models, delete files if models are getting deleted
 @listens_for(File, 'after_delete')
