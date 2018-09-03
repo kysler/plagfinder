@@ -81,10 +81,6 @@ class User(db.Model, UserMixin):
     # Setup Flask-User and specify the User data-model
 user_manager = UserManager(app, db, User)
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-
 # Delete hooks for models, delete files if models are getting deleted
 @listens_for(File, 'after_delete')
 def del_file(mapper, connection, target):
