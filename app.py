@@ -84,20 +84,20 @@ class User(db.Model, UserMixin):
 
 class CustomRegisterForm(RegisterForm):
     # Add a country field to the Register form
-    school = StringField(_('school'), validators=[DataRequired()])
-    course = StringField(_('course'), validators=[DataRequired()])
+    school = StringField(('school'), validators=[DataRequired()])
+    course = StringField(('course'), validators=[DataRequired()])
 
 class CustomRegisterForm(LoginForm):
     # Add a country field to the Register form
-    school = StringField(_('school'), validators=[DataRequired()])
-    course = StringField(_('course'), validators=[DataRequired()])
+    school = StringField(('school'), validators=[DataRequired()])
+    course = StringField(('course'), validators=[DataRequired()])
 
 # Customize the User profile form:
 
 class CustomUserProfileForm(UserProfileForm):
     # Add a country field to the UserProfile form
-    school = StringField(_('school'), validators=[DataRequired()])
-    course = StringField(_('course'), validators=[DataRequired()])
+    school = StringField(('school'), validators=[DataRequired()])
+    course = StringField(('course'), validators=[DataRequired()])
     
 class CustomUserManager(UserManager):
 
