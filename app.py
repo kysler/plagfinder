@@ -46,7 +46,7 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 app.config['CSRF_ENABLED'] = True 
-app.config['USER_ENABLE_EMAIL'] = True
+app.config['USER_ENABLE_EMAIL'] = False
 app.config['USER_ENABLE_USERNAME'] = True
 app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
 app.config['USER_APP_NAME'] = 'Flask-User Demo'
@@ -69,7 +69,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
     username = db.Column(db.String(255), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
+    email = db.Column(db.String(255), unique=True)
     email_confirmed_at = db.Column(db.DateTime())
     password = db.Column(db.String(255), nullable=False, server_default='')
 
