@@ -1,4 +1,3 @@
-{% if session['Logged_Admin'] or session['Logged_Instructor'] %}
 {% extends 'admin/master.html' %}
 {% block body %}
 {{ super() }}
@@ -51,6 +50,3 @@
     </div>
 </div>
 {% endblock body %}
-{% else %}
-404 FORBIDDEN ACCESS
-{% endif %}
