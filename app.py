@@ -115,37 +115,6 @@ def del_file(mapper, connection, target):
             # Don't care if was not deleted because it does not exist
             pass
 
-@app.route ( '/login', methods=[ 'POST', 'GET' ] )
-def login ( ):
-    form = LoginForm (   )
-
-    if form.validate_on_submit ( ):
-        user = User.query.filter_by ( last_name=form.username.data ).first ( )
-        if user:
-            if check_password_hash ( user.password, form.password.data ):
-                login_user ( user, remember=form.remember.data )
-                return redirect ( url_for ( 'index' ) )
-
-        return redirect ( url_for ( 'login' ) )
-        # return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
-
-    return render_template ( 'login.html', form = form )
-
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    form = RegisterForm()
-
-    if form.validate_on_submit():
-        hashed_id = generate_password_hash(form.password.data, method='sha256')
-        new_user = User(last_name=form.username.data, email=form.email.data, password=hashed_id)
-        db.session.add(new_user)
-        db.session.commit()
-
-        return redirect ( url_for ( 'login' ) )
-        #return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
-
-    return render_template('signup.html', form=form)
-
 @app.route ( '/logout', methods=[ 'POST', 'GET'] )
 @login_required
 def logout ( ):
@@ -182,7 +151,6 @@ instructor = Admin( app, 'PlagVoid Instructor', url='/instructor', endpoint="ins
 
 # Administrative views
 class FileView(sqla.ModelView):
-    @roles_required('Admin')
     column_display_pk = True
     column_searchable_list = ('id','name','path')
     form_columns = ('id','name','path')
@@ -199,16 +167,14 @@ class FileView(sqla.ModelView):
     }
 
 class UserView(sqla.ModelView):
-    @roles_required('Admin')
-    column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'phone', 'course', 'role')
+    column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'course', 'role')
     column_display_pk = True
-    form_columns = ('id', 'first_name', 'last_name', 'email', 'phone', 'course', 'role')
+    form_columns = ('id', 'first_name', 'last_name', 'email', 'course', 'role')
     form_choices = {'course': [ ('Instructor', 'Instructor'), ('BSCS-SD', 'BSCS-SD'), ('BSCS-MGD', 'BSCS-MGD'), ('BSIT-SM', 'BSIT-SM'),
                                 ('BSIT-CNS', 'BSIT-CNS')],
                     'role':[ ('Student', 'Student'), ('Admin', 'Admin'), ('Instructor', 'Instructor') ]}
 
 class FilesView(sqla.ModelView):
-    @roles_required('Instructor')
     column_display_pk = True
     can_delete = False
     # Pass additional parameters to 'path' to FileUploadField constructor
