@@ -1,5 +1,5 @@
-{% extends 'flask_user/_public_base.html' %}
-
+{% extends 'login.html' %}
+{{ super() }}
 {% block content %}
 {% from "flask_user/_macros.html" import render_field, render_submit_field %}
 <h1>{%trans%}Register{%endtrans%}</h1>
