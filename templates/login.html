@@ -4,7 +4,6 @@
 
 <head>
 {% block head %}
-{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 	<link href="static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
     <link href="static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -32,6 +31,7 @@
         <hr class="star-light">
         <div class="login-page">
    {% block form %}
+	{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 	<form action="" method="POST" class="form" role="form">
 	    {{ form.hidden_tag() }}
 
