@@ -32,22 +32,15 @@
         <hr class="star-light">
         <div class="login-page">
    {% block form %}
-   <form  method="POST" action="/login">
-        <h2 >Please sign in</h2>
-        {{ form.hidden_tag() }}
-        {{ wtf.form_field(form.username) }}
-        {{ wtf.form_field(form.password) }}
-        {{ wtf.form_field(form.remember) }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="message">Currently have no account? <a href="/signup">Sign Up</a></p>
-      </form>
+        <h2 >Please sign in or Register</h2>
+        <a href="/login"><button class="btn btn-lg btn-primary btn-block">Sign in</button></a>
+        <p class="message">Currently have no account? <a href="/register">Sign Up</a></p>
    {% endblock %}
 </div>
   </div>
 </div>
         <h2 class="font-weight-light mb-0" style="padding-bottom: 2%;">Copied Content Finder - Anti-Plagiarism</h2>
     </header>
-
     <!-- Bootstrap core JavaScript -->
     <script src="static/vendor/jquery/jquery.min.js"></script>
     <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
