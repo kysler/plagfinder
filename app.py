@@ -182,7 +182,7 @@ instructor = Admin( app, 'PlagVoid Instructor', url='/instructor', endpoint="ins
 
 # Administrative views
 class FileView(sqla.ModelView):
-	@roles_required('Admin')
+    @roles_required('Admin')
     column_display_pk = True
     column_searchable_list = ('id','name','path')
     form_columns = ('id','name','path')
@@ -199,7 +199,7 @@ class FileView(sqla.ModelView):
     }
 
 class UserView(sqla.ModelView):
-	@roles_required('Admin')
+    @roles_required('Admin')
     column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'phone', 'course', 'role')
     column_display_pk = True
     form_columns = ('id', 'first_name', 'last_name', 'email', 'phone', 'course', 'role')
@@ -208,7 +208,7 @@ class UserView(sqla.ModelView):
                     'role':[ ('Student', 'Student'), ('Admin', 'Admin'), ('Instructor', 'Instructor') ]}
 
 class FilesView(sqla.ModelView):
-	@roles_required('Instructor')
+    @roles_required('Instructor')
     column_display_pk = True
     can_delete = False
     # Pass additional parameters to 'path' to FileUploadField constructor
