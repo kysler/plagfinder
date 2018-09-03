@@ -63,7 +63,7 @@ class File(db.Model):
     def __unicode__(self):
         return self.name
 
-class User(db.Model, UserMixin):
+class user(db.Model, UserMixin):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
@@ -143,7 +143,7 @@ class FileView(sqla.ModelView):
         }
     }
 
-class UserView(sqla.ModelView):
+class userView(sqla.ModelView):
     column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'course', 'roles')
     column_display_pk = True
     form_columns = ('first_name', 'last_name', 'email', 'course', 'roles')
@@ -170,7 +170,7 @@ class FilesView(sqla.ModelView):
 
 # Add views
 admin.add_view ( FileView ( File, db.session, endpoint="File" ) )
-admin.add_view ( UserView ( User, db.session, name='User', endpoint="Accounts" ) )
+admin.add_view ( UserView ( user, db.session, name='User', endpoint="Accounts" ) )
 admin.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back to Index" ) )
 admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout" ) )
 instructor.add_view ( FilesView ( File, db.session, endpoint="Files" ) )
