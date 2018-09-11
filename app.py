@@ -129,23 +129,6 @@ def return_files_tut():
 admin = Admin ( app, 'PlagVoid Admin', endpoint="admin", template_mode='bootstrap3'  )
 instructor = Admin( app, 'PlagVoid Instructor', url='/instructor', endpoint="instructor", template_mode='bootstrap3' )
 
-# Administrative views
-class FileView(sqla.ModelView):
-    column_display_pk = True
-    column_searchable_list = ('id','name','path')
-    form_columns = ('id','name','path')
-    form_overrides = {
-        'path': form.FileUploadField
-    }
-
-    form_args = {
-        'path': {
-            'label': 'File',
-            'base_path': file_path,
-            'allow_overwrite': False
-        }
-    }
-
 class UserView(sqla.ModelView):
     column_searchable_list = ('id', 'first_name', 'last_name', 'email', 'course', 'roles')
     column_display_pk = True
@@ -160,7 +143,6 @@ admin.add_view (fileadmin.FileAdmin(file_path, '/files/', name='Files'))
 admin.add_view ( UserView ( User, db.session, name='User', endpoint="Accounts" ) )
 admin.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back to Index" ) )
 admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout" ) )
-instructor.add_view ( FilesView ( File, db.session, endpoint="Files" ) )
 instructor.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back to Index" ) )
 instructor.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Signout" ) )
 
