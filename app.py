@@ -23,6 +23,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter, roles_required
 from flask_user.forms import RegisterForm, EditUserProfileForm, LoginForm
 from flask_mail import Mail
+from flask_user.email_adapters import SendgridEmailAdapter
 import os
 import os.path as op
 
@@ -84,6 +85,7 @@ class User(db.Model, UserMixin):
 
     # Setup Flask-User and specify the User data-model
 user_manager = UserManager(app, db, User)
+user_manager.email_adapter = SendgridEmailAdapter(app)
 
 # Delete hooks for models, delete files if models are getting deleted
 @listens_for(File, 'after_delete')
