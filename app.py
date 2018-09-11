@@ -59,6 +59,7 @@ app.config.from_pyfile('config.cfg')
 
 db = SQLAlchemy(app)
 mail = Mail(app)
+user_manager.email_adapter = SendgridEmailAdapter(app)
 
 # Create models
 class File(db.Model):
