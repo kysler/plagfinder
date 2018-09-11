@@ -58,7 +58,7 @@ app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'index'
 app.config.from_pyfile('config.cfg')
 
 db = SQLAlchemy(app)
-user_manager.email_adapter = SendgridEmailAdapter(app)
+mail = Mail(app)
 
 # Create models
 class File(db.Model):
