@@ -10,6 +10,7 @@ from flask_admin import Admin, form
 from flask_admin.form import rules
 from flask_admin.contrib import sqla
 from flask_admin.base import MenuLink, Admin, BaseView, expose
+from flask_admin.contrib import fileadmin
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
@@ -48,9 +49,9 @@ login_manager.login_view = 'login'
 
 app.config['CSRF_ENABLED'] = True 
 app.config['USER_ENABLE_USERNAME'] = True
-app.config['USER_ENABLE_EMAIL'] = False
+app.config['USER_ENABLE_EMAIL'] = True
 app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
-app.config['USER_APP_NAME'] = 'Flask-User Demo'
+app.config['USER_APP_NAME'] = 'Plagiarism Finder'
 app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'index'
 app.config.from_pyfile('config.cfg')
 
@@ -153,25 +154,9 @@ class UserView(sqla.ModelView):
                                 ('BSIT-CNS', 'BSIT-CNS')],
                     'roles':[ ('Student', 'Student'), ('Admin', 'Admin'), ('Instructor', 'Instructor') ]}
 
-class FilesView(sqla.ModelView):
-    column_display_pk = True
-    can_delete = False
-    # Pass additional parameters to 'path' to FileUploadField constructor
-    form_columns = ('id', 'name', 'path')
-    column_searchable_list = ('id','name','path')
-    form_overrides = {
-        'path': form.FileUploadField
-    }
-    form_args = {
-        'path': {
-            'label': 'File',
-            'base_path': file_path,
-            'allow_overwrite': False
-        }
-    }
 
 # Add views
-admin.add_view ( FileView ( File, db.session, endpoint="File" ) )
+admin.add_view (fileadmin.FileAdmin(file_path, '/files/', name='Files'))
 admin.add_view ( UserView ( User, db.session, name='User', endpoint="Accounts" ) )
 admin.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back to Index" ) )
 admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout" ) )
