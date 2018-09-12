@@ -54,6 +54,7 @@ app.config['USER_ENABLE_EMAIL'] = True
 app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
 app.config['USER_APP_NAME'] = 'Plagiarism Finder'
 app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'index'
+app.config['SENDGRID_API_KEY'] = os.environ.get('SENDGRID_API_KEY')
 app.config.from_pyfile('config.cfg')
 
 db = SQLAlchemy(app)
