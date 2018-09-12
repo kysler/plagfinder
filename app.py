@@ -58,7 +58,6 @@ app.config['SENDGRID_API_KEY'] = os.environ.get('SENDGRID_API_KEY')
 app.config.from_pyfile('config.cfg')
 
 db = SQLAlchemy(app)
-mail = Mail(app)
 user_manager.email_adapter = SendgridEmailAdapter(app)
 
 # Create models
