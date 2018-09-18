@@ -30,4 +30,4 @@ def googleSearch(uploaded_file):
         soup = BeautifulSoup(response.text, 'html.parser')
         for item in soup.find('cite'):
             links.append(item)
-    return links
+    return links[0:5]
