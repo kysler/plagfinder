@@ -28,6 +28,6 @@ def googleSearch(uploaded_file):
         url = 'https://google.com/search?q=' + item
         response = requests.get ( url )
         soup = BeautifulSoup(response.text, 'html.parser')
-        for item in soup.find_all('h3', attrs={'class' : 'r'}):
-            links.append(item.a['href'][7:])
+        for item in soup.find('cite'):
+            links.append(item)
     return links
