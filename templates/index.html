@@ -62,7 +62,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body modal-lg">
-        {% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
+        {% from "/flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 <form action="" method="POST" class="form" role="form">
     {{ form.hidden_tag() }}
     <h4>{%trans%}Sign in{%endtrans%}</h4>
