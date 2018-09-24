@@ -58,7 +58,6 @@ app.config['SENDGRID_API_KEY'] = os.environ.get('SENDGRID_API_KEY')
 app.config.from_pyfile('config.cfg')
 
 db = SQLAlchemy(app)
-user_manager.email_adapter = SendgridEmailAdapter(app)
 
 # Create models
 class File(db.Model):
@@ -86,6 +85,7 @@ class User(db.Model, UserMixin):
 
     # Setup Flask-User and specify the User data-model
 user_manager = UserManager(app, db, User)
+user_manager.email_adapter = SendgridEmailAdapter(app)
 
 # Delete hooks for models, delete files if models are getting deleted
 @listens_for(File, 'after_delete')
