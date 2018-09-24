@@ -1,6 +1,6 @@
-{% extends 'login.html' %}
+{% extends 'index.html' %}
 {{ super() }}
-{% block form %}
+{% block loginform %}
 {% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 <form action="" method="POST" class="form" role="form">
     {{ form.hidden_tag() }}
