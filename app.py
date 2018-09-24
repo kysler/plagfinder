@@ -108,7 +108,6 @@ def startpage ( ):
     return redirect ( url_for ( 'index' ) )
 
 @app.route ('/index', methods=['POST', 'GET'])
-@login_required
 def index():
     if request.method == 'GET':
         return render_template ( 'index.html' )
