@@ -10,10 +10,10 @@
     <div class="form-group {% if field.errors %}has-error{% endif %}">
         {# Label on left, "New here? Register." on right #}
         <div class="row">
-            <div class="col">
+            <div class="col-5">
                 <h6><label for="{{ field.id }}" class="control-label">{{ field.label.text }}</label></h6>
             </div>
-            <div class="col text-right">
+            <div class="col-7">
                 {% if user_manager.USER_ENABLE_REGISTER and not user_manager.USER_REQUIRE_INVITATION %}
                     <a href="{{ url_for('user.register') }}" tabindex='190'>
                         {%trans%}New here? Register.{%endtrans%}</a>
@@ -33,10 +33,10 @@
     <div class="form-group {% if field.errors %}has-error{% endif %}">
         {# Label on left, "Forgot your Password?" on right #}
         <div class="row">
-            <div class="col">
+            <div class="col-5">
                 <h6><label for="{{ field.id }}" class="control-label">{{ field.label.text }}</label></h6>
             </div>
-            <div class="col text-right">
+            <div class="col-7">
                 {% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
                     <a href="{{ url_for('user.forgot_password') }}" tabindex='195'>
                         {%trans%}Forgot your Password?{%endtrans%}</a>
@@ -50,14 +50,10 @@
             {% endfor %}
         {% endif %}
     </div>
-
-    {# Remember me #}
-    {% if user_manager.USER_ENABLE_REMEMBER_ME %}
+      {% if user_manager.USER_ENABLE_REMEMBER_ME %}
     {{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
     {% endif %}
-
-    {# Submit button #}
-    {{ render_submit_field(form.submit, tabindex=180) }}
+    <button>Sign in</button>
 </form>
 
 {% endblock %}

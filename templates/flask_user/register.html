@@ -11,13 +11,13 @@
     <div class="form-group {% if field.errors %}has-error{% endif %}">
         {# Label on left, "Already registered? Sign in." on right #}
         <div class="row">
-            <div class="col">
+            <div class="col-5">
                 <h6><label for="{{ field.id }}" class="control-label">{{ field.label.text }} </label><h6>
             </div>
-            <div class="col text-right">
+            <div class="col-7">
                 {% if user_manager.USER_ENABLE_REGISTER %}
                     <a href="{{ url_for('user.login') }}" tabindex='290'>
-                        {%trans%}Already registered? Sign in.{%endtrans%}</a>
+                        {%trans%}Already registered?{%endtrans%}</a>
                 {% endif %}
             </div>
         </div>
@@ -32,14 +32,15 @@
     {% if user_manager.USER_ENABLE_EMAIL and user_manager.USER_ENABLE_USERNAME %}
         {{ render_field(form.email, tabindex=220) }}
     {% endif %}
-
-    {{ render_field(form.password, tabindex=230) }}
+           
+            {{ render_field(form.password, tabindex=230) }}
 
     {% if user_manager.USER_REQUIRE_RETYPE_PASSWORD %}
+            
         {{ render_field(form.retype_password, tabindex=240) }}
     {% endif %}
 
-    {{ render_submit_field(form.submit, tabindex=280) }}
+    <button>Sign in</button>
 </form>
 
 {% endblock %}

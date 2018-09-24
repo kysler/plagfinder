@@ -26,32 +26,124 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Plagiarism Finder</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="static/img/ncst.png"> Plagiarism Finder</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto"
+          <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
             	{% if call_or_get(current_user.is_authenticated) %}
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.edit_user_profile') }}">{{ current_user.username or current_user.email }}</a>
-                &nbsp; | &nbsp;
+              </li>
+	    <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
+                          <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#scan">Scan</a>
+            </li>
+	    <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3" data-toggle="modal" data-target="#my" style="cursor: default;">LOGIN</a>
+            </li>
+	      <li class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.logout') }}">{%trans%}Sign out{%endtrans%}</a>
-            	{% else %}
+		{% else %}
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.login') }}">{%trans%}Sign in{%endtrans%}</a>
             	{% endif %}
-            </li>
+	      </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </nav>	
 {% endblock %}
-    <!-- Scan Grid Section -->
-<section class="masthead">
+	    <!--modal-->
+    <!-- log in form--->
+     <div class="modal fade" id="my" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content modal-lg">
+        <div class="modal-header modal-lg">
+            <h4 class="modal-title">LOGIN</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body modal-lg">
+                <form class="login-form">
+      <button id="mybtn" data-dismiss="modal"><b>LOGIN</b></button>
+                    </form>
+        </div>
+   
+      </div>
+    </div>
+  </div>
+     <!-- end form--->
+	
+	<!-- header-->
+	    <header class="masthead bg-primary text-white">
       <div class="container">
+          <div class="text-center">
+        <h1 class="text-uppercase mb-2">Plagiarism Finder</h1>
+        <h2 class="font-weight-light mb-5">Find the Plagarized in your Documents</h2>
+        </div>
+        <div class="row">
+            <div class="col-6">
+        <h3>What is Plagiarism Finder?</h3>
+                <h5>Plagiarism is an act of stealing of someone's work.</h5> 
+                <h5>Plagiarism Finder is a plagiarism detection software</h5>
+                <h5>By using Plagiarism Finder student will know if they are prone in plagiarism when doing their assignment or research.</h5>
+                </div>
+            <div class="col-6">
+                <img  src="static/img/magni2.png" alt="">
+            </div>
+        </div>         
+          <img style="position: absolute; left: 80;" src="static/img/man.png" alt="">
+      </div>
+    </header>
+<section class="bg-secondary text-white">
+    <div class="container" style="position: relative;">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center mb-5">How to use Plagiarism Finder</h3>
+</div>
+            <div class="col-12">
+                <img class="center" src="static/img/tutorial3.png">   
+    </div>
+            <div class="col-12">
+                <h4 class="ttext">1.</h4>
+            <h5 class="ttext">To able to scan your document.</h5>
+		   <h5 class="ttext">First you need to choose the file you need to scan by clicking the "Open Button".</h5>
+                <h5 class="ttext mb-5">(The open button will show the file explorer)</h5>
+            </div>
+            <div class="col-12">
+                <img class="center" src="static/img/tutorial1.png">   
+    </div>
+            <div class="col-12">
+                <h4 class="ttext">2.</h4>
+            <h5 class="ttext">After clicking the "Open Button".</h5>
+                <h5 class="ttext mb-5">Choose the file that you want to scan, then hit enter or click the "Open Button".</h5>
+            </div>
+            <div class="col-12">
+                <img class="center" src="static/img/tutorial2.png">   
+        </div>
+             <div class="col-12">
+                                 <h4 class="ttext">3.</h4>
+            <h5 class="ttext">After choosing the file you desire to scan</h5>
+                <h5 class="ttext mb-5">Click the "Scan Button", to start the Scanning proccess and wait for the result</h5>
+            </div>
+
+
+    </div>
+    </div>
+    </section>
+	<!--end-->
+	
+    <!-- Scan Grid Section -->
+<section class="masthead" id="scan">
+      <div class="container">
+	      {% block body %}
+	      <h2 id="space" class="text-center">Scan</h2>
         <div class="row">
           <div class="col-sm-4">
 
 <div class="row">
     <div class="col-6">
-{% block body %}
     <div class="files">
         <br>
         <!-- pag napindot ung premium na button may pop up -->
@@ -61,7 +153,43 @@
         <br>
            <center> <h5>NOW!</h5></center>
             <hr width="90%">
-        <button>Premium</button>
+        <button data-toggle="modal" data-target="#myModal">Premium</button>
+	            <!-- modal box-->
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content modal-lg">
+        <div class="modal-header modal-lg">
+            <h4 class="modal-title">Get Premium Subscriptions</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body modal-lg">
+          <h5>Select your preferred payment</h5>
+            <form>
+                <div class="row">
+                    <div class="col-lg-6">
+            <label for="m">Monthly Subscription</label><br>
+            <input type="button" id="m" value="aaaa" style="display: inline-block;"><br><br><br>
+            <label for="a">Monthly Subscription</label><br>
+            <input type="button" id="a" value="aaaa" style="display: inline-block;"><br>
+</div>
+                    <div class="col-lg-6">
+            <label for="m">Monthly Subscription</label><br>
+            <input type="button" id="m" value="aaaa" style="display: inline-block;"><br><br><br>
+            <label for="a">Monthly Subscription</label><br>
+            <input type="button" id="a" value="aaaa" style="display: inline-block;">
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="modal-footer modal-lg">
+          <button class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
         </div>
     </div>
     <div class="col-6">
@@ -101,22 +229,55 @@
         $(document).ready(function(){
             var progress_circle = $(".my-progress-bar").gmpc({
 });
-})-->
-    </script>
+})
+    </script>-->
 	{% endblock %}
         </div>
     </div>
 
     </div>
-    <div class="container">
-    <ul>
-        <li>
-   <h6>This Project is for the use of NCST Research Faculty</h6>
-            </li>
-        </ul>
-        </div>
+<br>
     </section>
-
+	
+    <!--About Section-->
+<section class="bg-primary text-white text-center" id="about">
+    <h2 class="mb-5">About Us</h2>
+    <div class="container">
+    <div class="row">
+        <div class="col-12" style="padding-bottom: 30px;">
+        <img src="static/img/vince.png">
+            <br>
+            <h4>Vincent Jeremy Bravo</h4>
+            <h5>Programmer</h5>
+        </div>
+        <div class="col-6 text-center">
+        <img src="static/img/ARES.png">
+            <br>
+            <h4>Joshua Ira San Ramon</h4>
+            <h5>Web Designer</h5>
+            <br>
+        <img src="static/img/silvio.png">
+            <br>
+            <h4>Marwell Silvio</h4>
+                   <h5>Documentary</h5>
+        </div>
+                <div class="col-6 text-center">
+        <img src="static/img/chai.png">
+                    <br>
+                  <h4>Chairond Lauzon</h4>  
+            <h5>System Analysis</h5>
+            <br>
+        <img src="static/img/TALIGATO.png">
+                    <br>
+                    <h4>Elijah Taligato</h4>
+                   <h5>Documentary</h5>
+        </div>
+        
+        </div>
+    </div>
+    </section>
+<!--End-->
+	
     <div class="copyright py-4 text-center text-white">
       <div class="container">
         <small>Copyright &copy; Plagiarism Finder-Thesis Project National College of Science and Technology 2018</small>
@@ -146,4 +307,3 @@
     <script src="static/js/homejs.js"></script>
 </body>
 </html>
-
