@@ -28,6 +28,5 @@ def googleSearch(uploaded_file):
         url = 'https://google.com/search?q=' + item
         response = requests.get ( url )
         soup = BeautifulSoup(response.text, 'html.parser')
-        for item in soup.find_all("a",href=re.compile("(?<=/url\?q=)(htt.*://.*)")):
-            links.append(re.split(":(?=http)",link["href"].replace("/url?q=","")))
+        links.append(soup.find('cite').text)
     return links[0:5]
