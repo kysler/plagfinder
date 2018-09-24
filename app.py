@@ -110,7 +110,7 @@ def startpage ( ):
 @app.route ('/index', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
-        return render_template ( 'url_for('user.login')' )
+        return redirect ( 'url_for('user.login')' )
 
 @app.route ( '/upload', methods=[ 'POST', 'GET' ] )
 @login_required
