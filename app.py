@@ -106,6 +106,7 @@ def logout ( ):
     return redirect ( url_for ( 'index' ) )
 
 @app.route ( '/', methods=[ 'POST', 'GET' ] )
+@login_required
 def startpage ( ):
     return render_template ( 'index.html' )
 
