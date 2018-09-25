@@ -1,6 +1,6 @@
 {% extends 'login.html' %}
 {{ super() }}
-{% block form %}
+{% block loginform %}
 {% from "flask_user/_macros.html" import render_field, render_submit_field %}
 
 <form action="" method="POST" novalidate formnovalidate class="form" role="form">
@@ -40,7 +40,7 @@
         {{ render_field(form.retype_password, tabindex=240) }}
     {% endif %}
 
-    <button>Sign in</button>
+    <button>Register</button>
 </form>
 
 {% endblock %}
