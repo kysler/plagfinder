@@ -54,7 +54,6 @@
     <!-- log in form--->
      <div class="modal fade" id="my" role="dialog">
 	<div class="modal-dialog modal-lg">
-    
       <!-- Modal content-->
       <div class="modal-content modal-lg">
         <div class="modal-header modal-lg">
@@ -62,8 +61,6 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body modal-lg">
-	{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
-  	{% include 'flask_user/login.html' %}
 	{% block loginform %}
 	{% endblock %}
         </div>
