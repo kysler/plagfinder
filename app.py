@@ -110,7 +110,7 @@ def startpage ( ):
 @app.route ('/index', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
-        return render_template ('flask_user/login.html')
+        return redirect ( url_for ( 'user.login' ) )
 
 
 @app.route ( '/upload', methods=[ 'POST', 'GET' ] )
