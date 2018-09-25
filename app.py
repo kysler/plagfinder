@@ -109,8 +109,9 @@ def startpage ( ):
 
 @app.route ('/index', methods=['POST', 'GET'])
 def index():
+    login = LoginForm()
     if request.method == 'GET':
-        return render_template ( 'index.html', form = LoginForm )
+        return render_template ( 'index.html', form = login)
 
 @app.route ( '/upload', methods=[ 'POST', 'GET' ] )
 @login_required
