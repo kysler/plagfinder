@@ -112,6 +112,9 @@ def index():
     login = LoginForm()
     if request.method == 'GET':
         return render_template ( 'index.html', form = login)
+    else:
+        return redirect ( url_for('user.login') )
+
 
 @app.route ( '/upload', methods=[ 'POST', 'GET' ] )
 @login_required
