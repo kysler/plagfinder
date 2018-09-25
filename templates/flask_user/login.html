@@ -49,7 +49,7 @@
         {% endif %}
     </div>
       {% if user_manager.USER_ENABLE_REMEMBER_ME %}
-    {{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
+    {{ render_checkbox_field(form.remember_me, tabindex=130) }}
     {% endif %}
     <button>Sign in</button>
 </form>
