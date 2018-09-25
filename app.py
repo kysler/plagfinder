@@ -53,7 +53,8 @@ app.config['USER_ENABLE_USERNAME'] = True
 app.config['USER_ENABLE_EMAIL'] = True
 app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
 app.config['USER_APP_NAME'] = 'Plagiarism Finder'
-app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'index'
+app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'startpage'
+app.config['USER_AFTER_LOGIN_ENDPOINT'] = 'startpage'
 app.config['SENDGRID_API_KEY'] = os.environ.get('SENDGRID_API_KEY')
 app.config.from_pyfile('config.cfg')
 
@@ -105,7 +106,7 @@ def logout ( ):
 
 @app.route ( '/', methods=[ 'POST', 'GET' ] )
 def startpage ( ):
-    return redirect ( url_for ( 'index' ) )
+    return render_template ( 'index.html' )
 
 @app.route ('/index', methods=['POST', 'GET'])
 def index():
