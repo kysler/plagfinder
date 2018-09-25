@@ -62,6 +62,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body modal-lg">
+  {% include url_for('user.login') %}
 	{% block loginform %}
 	{% endblock %}
         </div>
