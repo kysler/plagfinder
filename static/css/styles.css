@@ -567,7 +567,7 @@ hr {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
-  width: 30%;
+  width: 100%;
 }
 
 #mybtn:hover {
