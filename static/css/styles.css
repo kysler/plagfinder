@@ -530,7 +530,7 @@ hr {
 }
 
 
-#premium input {
+#premium button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -548,7 +548,7 @@ hr {
     margin-left: 25px;
 }
 
-#premium input:hover {background-color: #337ab7;}
+#premium button:hover {background-color: #337ab7;}
 
 .modal-body label{
     margin: 15px;
