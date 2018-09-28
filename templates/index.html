@@ -29,31 +29,31 @@
         <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="static/img/ncst.png"> Plagiarism Finder</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-		<li class="nav-item mx-0 mx-lg-1">
+    <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
             </li>
-		{% if call_or_get(current_user.is_authenticated) %}
+    {% if call_or_get(current_user.is_authenticated) %}
             <li class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.edit_user_profile') }}">{{ current_user.username or current_user.email }}</a>
               </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#scan">Scan</a>
             </li>
-	      <li class="nav-item mx-0 mx-lg-1">
+        <li class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.logout') }}">{%trans%}Sign out{%endtrans%}</a>
-		{% else %}
+    {% else %}
                 <a class="nav-link py-3 px-0 px-lg-3" data-toggle="modal" data-target="#login" style="cursor: default;">{%trans%}Sign in{%endtrans%}</a>
-            	{% endif %}
-	      </li>
+              {% endif %}
+        </li>
           </ul>
         </div>
       </div>
-    </nav>	
+    </nav>  
 {% endblock %}
-	    <!--modal-->
+      <!--modal-->
     <!-- log in form--->
      <div class="modal fade" id="login" role="dialog">
-	<div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg">
       <!-- Modal content-->
       <div class="modal-content modal-lg">
         <div class="modal-header modal-lg">
@@ -61,8 +61,9 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body modal-lg">
-	<a data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</a>
-	<div class="modalform">
+  <a data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</a>
+  <div class="modalform"> 
+{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 <form action="" method="POST" class="form" role="form">
     {{ form.hidden_tag() }}
     <h4>{%trans%}Sign in{%endtrans%}</h4>
@@ -117,13 +118,13 @@
     <button>Sign in</button>
 </form>
         </div>
-   	</div>
+    </div>
       </div>
     </div>
   </div>
      <!-- end form--->
-	
-	 <!-- register form-->
+  
+   <!-- register form-->
          <div class="modal fade" id="register" role="dialog">
     <div class="modal-dialog">
     
@@ -205,9 +206,9 @@
       </div>
     </div>
     <!--end form-->
-	
-	<!-- header-->
-	    <header class="masthead bg-primary text-white">
+  
+  <!-- header-->
+      <header class="masthead bg-primary text-white">
       <div class="container">
           <div class="text-center">
         <h1 class="text-uppercase mb-2">Plagiarism Finder</h1>
@@ -239,7 +240,7 @@
             <div class="col-12">
                 <h4 class="ttext">1.</h4>
             <h5 class="ttext">To able to scan your document.</h5>
-		   <h5 class="ttext">First you need to choose the file you need to scan by clicking the "Open Button".</h5>
+       <h5 class="ttext">First you need to choose the file you need to scan by clicking the "Open Button".</h5>
                 <h5 class="ttext mb-5">(The open button will show the file explorer)</h5>
             </div>
             <div class="col-12">
@@ -263,13 +264,13 @@
     </div>
     </div>
     </section>
-	<!--end-->
-	
+  <!--end-->
+  
     <!-- Scan Grid Section -->
 <section class="masthead" id="scan">
       <div class="container">
-	      {% block body %}
-	      <h2 id="space" class="text-center">Scan</h2>
+        {% block body %}
+        <h2 id="space" class="text-center">Scan</h2>
         <div class="row">
           <div class="col-sm-4">
 
@@ -285,7 +286,7 @@
            <center> <h5>NOW!</h5></center>
             <hr width="90%">
         <button data-toggle="modal" data-target="#myModal">Premium</button>
-	            <!-- modal box-->
+              <!-- modal box-->
     <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
     
@@ -339,18 +340,18 @@
 </div>
 
           </div>
-		<form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
           <input id="upload" type="file" name="files" accept=".docx"/>
-		  <input type="submit" class="scan"/>
-		</form>
+      <input type="submit" class="scan"/>
+    </form>
           <div href="" class="file-well col-sm-8" id="upload_link1" style="margin-bottom: 2%; word-wrap: break-word;">
-		 {% block items %}
+     {% block items %}
             <table>
               <tr><center><i class="fa fa-cloud-upload" style="font-size:150px"></i></center></tr>
               <hr width="45%"/>
               <tr><center><h1 style="color: #D3D3D3">Upload a File to Scan</h1></center></tr>
-		  </table>
-		  {% endblock %}
+      </table>
+      {% endblock %}
           </div>
             <!--<div class="file-well col-sm-8" id="aaa" style="margin-bottom: 2%";>
             <h6>Dito ung pangalan ng file</h6>
@@ -362,14 +363,14 @@
 });
 })
     </script>-->
-	{% endblock %}
+  {% endblock %}
         </div>
     </div>
 
     </div>
 <br>
     </section>
-	
+  
     <!--About Section-->
 <section class="bg-primary text-white text-center" id="about">
     <h2 class="mb-5">About Us</h2>
@@ -408,7 +409,7 @@
     </div>
     </section>
 <!--End-->
-	
+  
     <div class="copyright py-4 text-center text-white">
       <div class="container">
         <small>Copyright &copy; Plagiarism Finder-Thesis Project National College of Science and Technology 2018</small>
