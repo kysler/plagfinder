@@ -107,8 +107,7 @@ def logout ( ):
 
 @app.route ('/', methods=['POST', 'GET'])
 def index():
-    if request.method == 'GET':
-        return redirect ( url_for ( 'user.login' ) )
+    return render_template(( 'user.login' ) )
 
 @app.route ( '/upload', methods=[ 'POST', 'GET' ] )
 @login_required
