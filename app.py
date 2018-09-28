@@ -105,16 +105,10 @@ def logout ( ):
     logout_user( )
     return redirect ( url_for ( 'index' ) )
 
-@app.route ( '/', methods=[ 'POST', 'GET' ] )
-@login_required
-def startpage ( ):
-    return render_template ( 'index.html' )
-
-@app.route ('/index', methods=['POST', 'GET'])
+@app.route ('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
         return redirect ( url_for ( 'user.login' ) )
-
 
 @app.route ( '/upload', methods=[ 'POST', 'GET' ] )
 @login_required
