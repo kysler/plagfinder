@@ -50,6 +50,8 @@
       </div>
     </nav>  
 {% endblock %}
+{% if call_or_get(current_user.is_authenticated) %}
+{% else %}
       <!--modal-->
     <!-- log in form--->
      <div class="modal fade" id="login" role="dialog">
@@ -161,7 +163,7 @@
       </div>
     </div>
     <!--end form-->
-  
+{% endif %}
   <!-- header-->
       <header class="masthead bg-primary text-white">
       <div class="container">
