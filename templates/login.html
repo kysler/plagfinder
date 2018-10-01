@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {{ super() }}
 {% block modalform %}
-{% if call_or_get(current_user.is_authenticated) %}
-{% else %}
       <!--modal-->
     <!-- log in form--->
      <div class="modal fade" id="login" role="dialog">
