@@ -109,7 +109,7 @@ def logout ( ):
 def index():
     return redirect ( url_for ( 'user.login' ) )
 
-@app.route ( '/upload', methods=[ 'POST', 'GET' ] )
+@app.route ( '/homepage', methods=[ 'POST', 'GET' ] )
 @login_required
 def upload():
     if request.method == 'POST' and 'files' in request.files:
