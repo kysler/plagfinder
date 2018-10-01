@@ -117,7 +117,7 @@ def upload():
         output = googleSearch('tmp/uploads/' + filename)
         return render_template('output.html', output = output)
     else:
-        return render_template ( 'index.html' )
+        return render_template ( 'base.html' )
 
 @app.route('/results/')
 def return_files_tut():
