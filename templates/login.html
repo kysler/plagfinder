@@ -103,7 +103,7 @@
         <div class="modal-body">
 <div class="modalform">
 <form action="{{ url_for('user.forgot_password') }}" method="POST" class="form" role="form">
-    {{ forgot_password_view.form.hidden_tag() }}
+    {{ user.forgot_password_view.form.hidden_tag() }}
     {{ render_field(form.email, tabindex=10) }}
     <a href="{{ url_for('user.login') }}" tabindex='195'>
     {%trans%}Back{%endtrans%}</a>
