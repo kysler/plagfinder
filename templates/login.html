@@ -37,7 +37,7 @@
     {% endif %}
 
     {# Submit button #}
-    <input type="submit" value="LOGIN" id="submit">
+    <input type="submit" value="LOGIN" class="submit">
     <button id="mybtn" data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</button>
 </form>
         </div>
@@ -104,9 +104,9 @@
 <div class="modalform">
 <form action="{{ url_for('user.forgot_password') }}" method="POST" class="form" role="form">
     {{ form.hidden_tag() }}
+     <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor"><-- Back to Login</a>
     {{ render_field(form.email, tabindex=10) }}
-      <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor">Back to Login</a>
-    {{ render_submit_field(form.submit, tabindex=90) }}
+    <input type="submit" value="SEND" class="submit">
 </form>
          </div>
   
