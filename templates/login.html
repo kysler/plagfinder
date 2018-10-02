@@ -4,27 +4,45 @@
       <!--modal-->
     <!-- log in form--->
      <div class="modal fade" id="login" role="dialog">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
       <!-- Modal content-->
-      <div class="modal-content modal-lg">
-        <div class="modal-header modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
             <h4 class="modal-title">LOGIN</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <div class="modal-body modal-lg">
-  <a data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</a>
+        <div class="modal-body">
+
   <div class="modalform"> 
 {% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 <form action="{{ url_for('user.login') }}" method="POST" class="form" role="form">
     {{ login_form.hidden_tag() }}
-
+<div class=row>
+      <div class=col-12>
+            <div class=col-5>
     {# Username or Email #}
+            </div>
+          <div class=col-7>  
+    <a data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</a>
+            </div>
     {% set field = login_form.username if user_manager.USER_ENABLE_USERNAME else login_form.email %}
     {{ render_field(field, tabindex=110) }}
-
+            </div>
+       <div class=col-12>
+             <div class=col-5>
     {# Password #}
+        </div>
+             <div class=col-7>
+                 {% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
+        <p>
+            <a data-dismiss="modal" data-toggle="modal" href="#forgot" class="cursor">
+            {%trans%}Forgot your Password?{%endtrans%}</a>
+        </p>
+    {% endif %}
+                   </div>
     {{ render_field(login_form.password, tabindex=120) }}
-
+</div>
+      
     {# Remember me #}
     {% if user_manager.USER_ENABLE_REMEMBER_ME %}
     {{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
@@ -32,14 +50,8 @@
 
     {# Submit button #}
     {{ render_submit_field(login_form.submit, tabindex=180) }}
+      </div>
 </form>
-    {% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
-        <p>
-            <br/>
-            <a data-dismiss="modal" data-toggle="modal" href="#forgot" class="cursor">
-            {%trans%}Forgot your Password?{%endtrans%}</a>
-        </p>
-    {% endif %}
         </div>
     </div>
       </div>
