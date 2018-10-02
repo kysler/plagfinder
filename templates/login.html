@@ -35,15 +35,10 @@
     {% if user_manager.USER_ENABLE_REMEMBER_ME %}
     {{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
     {% endif %}
-        <div class="row">
-              <div class="col-6>
+
     {# Submit button #}
-    {{ render_submit_field(login_form.submit, tabindex=180) }}
-                  </div>
-                <div class="col-6>    
-    <button data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</button>
-                    </div>
-      </div>
+    <input type="submit" value="LOGIN" id="submit">
+    <button id="mybtn" data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</button>
 </form>
         </div>
     </div>
