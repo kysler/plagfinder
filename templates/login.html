@@ -25,13 +25,10 @@
     {# Password #}
      {{ render_field(login_form.password, tabindex=120) }}
      {% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
-        <p>
+        
             <a data-dismiss="modal" data-toggle="modal" href="#forgot" class="cursor">
             {%trans%}Forgot your Password?{%endtrans%}</a>
-        </p>
     {% endif %}
-
-    {# Remember me #}
     {% if user_manager.USER_ENABLE_REMEMBER_ME %}
     {{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
     {% endif %}
