@@ -21,16 +21,18 @@
       <div class=col-12>
             <div class=col-5>
     {# Username or Email #}
+      {% set field = login_form.username if user_manager.USER_ENABLE_USERNAME else login_form.email %}
+    {{ render_field(field, tabindex=110) }}
             </div>
           <div class=col-7>  
     <a data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</a>
             </div>
-    {% set field = login_form.username if user_manager.USER_ENABLE_USERNAME else login_form.email %}
-    {{ render_field(field, tabindex=110) }}
+
             </div>
        <div class=col-12>
              <div class=col-5>
     {# Password #}
+     {{ render_field(login_form.password, tabindex=120) }}
         </div>
              <div class=col-7>
                  {% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
@@ -40,17 +42,15 @@
         </p>
     {% endif %}
                    </div>
-    {{ render_field(login_form.password, tabindex=120) }}
 </div>
       
     {# Remember me #}
     {% if user_manager.USER_ENABLE_REMEMBER_ME %}
     {{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
     {% endif %}
-
+     </div>
     {# Submit button #}
     {{ render_submit_field(login_form.submit, tabindex=180) }}
-      </div>
 </form>
         </div>
     </div>
