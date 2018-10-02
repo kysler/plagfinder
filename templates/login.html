@@ -17,40 +17,32 @@
 {% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 <form action="{{ url_for('user.login') }}" method="POST" class="form" role="form">
     {{ login_form.hidden_tag() }}
-<div class=row>
-      <div class=col-12>
-            <div class=col-5>
+      
     {# Username or Email #}
       {% set field = login_form.username if user_manager.USER_ENABLE_USERNAME else login_form.email %}
     {{ render_field(field, tabindex=110) }}
-            </div>
-          <div class=col-7>  
-    <a data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</a>
-            </div>
-
-            </div>
-       <div class=col-12>
-             <div class=col-5>
+      
     {# Password #}
      {{ render_field(login_form.password, tabindex=120) }}
-        </div>
-             <div class=col-7>
-                 {% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
+     {% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
         <p>
             <a data-dismiss="modal" data-toggle="modal" href="#forgot" class="cursor">
             {%trans%}Forgot your Password?{%endtrans%}</a>
         </p>
     {% endif %}
-                   </div>
-</div>
-      
+
     {# Remember me #}
     {% if user_manager.USER_ENABLE_REMEMBER_ME %}
     {{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
     {% endif %}
-     </div>
+        <div class="row">
+              <div class="col-6>
     {# Submit button #}
     {{ render_submit_field(login_form.submit, tabindex=180) }}
+                  </div>
+                <div class="col-6>    
+    <button data-dismiss="modal" data-toggle="modal" href="#register" class="cursor">Sign up</button>
+                    </div>
 </form>
         </div>
     </div>
@@ -117,10 +109,8 @@
 <form action="{{ url_for('user.forgot_password') }}" method="POST" class="form" role="form">
     {{ form.hidden_tag() }}
     {{ render_field(form.email, tabindex=10) }}
-    <a href="{{ url_for('user.login') }}" tabindex='195'>
-    {%trans%}Back{%endtrans%}</a>
+      <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor">Back to Login</a>
     {{ render_submit_field(form.submit, tabindex=90) }}
-    <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor">Back to Login</a>
 </form>
          </div>
   
