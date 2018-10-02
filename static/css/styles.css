@@ -561,13 +561,13 @@ hr {
   outline: 0;
   background: #42a5f5;
   border: 0;
-  padding: 15px;
+  padding: 10px;
   color: #ffffff;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
-  width: 100%;
+  width: 47%;
 }
 
 #mybtn:hover {
@@ -598,5 +598,21 @@ header.masthead {
 
 .cursor{
     cursor: default;
+}
+
+#submit {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #42a5f5;
+  width: 47%;
+  border: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight:bold;
+  color: #ffffff;
+}
+#submit:hover {
+    background-color: #337ab7;
 }
 
