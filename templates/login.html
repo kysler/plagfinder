@@ -101,10 +101,14 @@
         </div>
         <div class="modal-body">
 <div class="modalform">
-    <form>
-        <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor">Back to Login</a>
-    </form>
-
+<form action="" method="POST" class="form" role="form">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.email, tabindex=10) }}
+    <a href="{{ url_for('user.login') }}" tabindex='195'>
+    {%trans%}Back{%endtrans%}</a>
+    {{ render_submit_field(form.submit, tabindex=90) }}
+    <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor">Back to Login</a>
+</form>
          </div>
   
         </div>
