@@ -203,13 +203,20 @@
       <input type="submit" class="scan"/>
     </form>
           <div href="" class="file-well col-sm-8" id="upload_link1" style="margin-bottom: 2%; word-wrap: break-word;">
-     {% block items %}
-            <table>
-              <tr><center><i class="fa fa-cloud-upload" style="font-size:150px"></i></center></tr>
-              <hr width="45%"/>
-              <tr><center><h1 style="color: #D3D3D3">Upload a File to Scan</h1></center></tr>
-      </table>
-      {% endblock %}
+                <form method="post">
+                    {{ form.csrf_token }}
+                    {{ form.title.label }}
+                    {{ form.title }}
+                    {{ form.body.label }}
+                    {{ form.body }}
+                    {{ form.submit }}
+                </form>
+            </div>
+            {{ ckeditor.load() }}
+            {{ ckeditor.config(name='body', allowedContent = true) }}
+            <script>
+            CKEDITOR.instances.body.setData( {{ content|tojson }} );
+            </script>
           </div>
   {% endblock %}
         </div>
