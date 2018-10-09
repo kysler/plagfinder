@@ -55,6 +55,19 @@
   <!-- header-->
       <header class="masthead bg-primary text-white">
       <div class="container">
+        {# One-time system messages called Flash messages #}
+        {% block flash_messages %}
+            {%- with messages = get_flashed_messages(with_categories=true) -%}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        {% if category=='error' %}
+                            {% set category='danger' %}
+                        {% endif %}
+                        <div class="alert alert-{{category}}">{{ message|safe }}</div>
+                    {% endfor %}
+                {% endif %}
+            {%- endwith %}
+        {% endblock %}
           <div class="text-center">
         <h1 class="text-uppercase mb-2">Plagiarism Finder</h1>
         <h2 class="font-weight-light mb-5">Find the Plagarized in your Documents</h2>
