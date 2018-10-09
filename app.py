@@ -99,6 +99,11 @@ def del_file(mapper, connection, target):
         except OSError:
             # Don't care if was not deleted because it does not exist
             pass
+
+class PostForm(FlaskForm):
+    title = StringField('Title')
+    body = CKEditorField('Body', validators=[DataRequired()])
+    submit = SubmitField('Submit')
 	
 @app.errorhandler(500)
 def handle_bad_request(e):
