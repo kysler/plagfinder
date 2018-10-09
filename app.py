@@ -98,6 +98,10 @@ def del_file(mapper, connection, target):
         except OSError:
             # Don't care if was not deleted because it does not exist
             pass
+	
+@app.errorhandler(505)
+def handle_bad_request(e):
+    return redirect(url_for('index'))
 
 @app.route ( '/logout', methods=[ 'POST', 'GET'] )
 @login_required
