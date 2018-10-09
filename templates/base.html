@@ -64,6 +64,7 @@
                             {% set category='danger' %}
                         {% endif %}
                         <div class="alert alert-{{category}}">{{ message|safe }}</div>
+                        <a class="close" href="#">×</a>
                     {% endfor %}
                 {% endif %}
             {%- endwith %}
