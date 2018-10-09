@@ -61,6 +61,7 @@ app.config['SENDGRID_API_KEY'] = os.environ.get('SENDGRID_API_KEY')
 app.config.from_pyfile('config.cfg')
 
 db = SQLAlchemy(app)
+ckeditor = CKEditor(app)
 
 # Create models
 class File(db.Model):
