@@ -102,7 +102,7 @@
 <form action="{{ url_for('user.forgot_password') }}" method="POST" class="form" role="form">
     {{ form.hidden_tag() }}
      <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor"><-- Back to Login</a>
-    {{ render_field(user.forgot.form.email, tabindex=10) }}
+    {{ render_field(form.email, tabindex=10) }}
     <input type="submit" value="SEND" class="submit">
 </form>
          </div>
