@@ -141,7 +141,7 @@ class UserView(sqla.ModelView):
 
 
 # Add views
-admin.add_view (fileadmin.FileAdmin(file_path, '/files/', name='Files'))
+admin.add_view (fileadmin.FileAdmin(file_path, name='Files'))
 admin.add_view ( UserView ( User, db.session, name='User', endpoint="Accounts" ) )
 admin.add_link ( MenuLink( name='Scan', url= '../../upload', endpoint="Back to Index" ) )
 admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout" ) )
