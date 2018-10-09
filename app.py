@@ -131,7 +131,7 @@ def upload():
         html = output.value
         return render_template('member.html', form=form, content=html)
     else:
-        return render_template ( 'member.html', form=form,)
+        return render_template ( 'member.html', form=form, content=' ')
     
 @app.route('/results/')
 def return_files_tut():
