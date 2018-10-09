@@ -99,7 +99,7 @@ def del_file(mapper, connection, target):
             # Don't care if was not deleted because it does not exist
             pass
 	
-@app.errorhandler(505)
+@app.errorhandler(500)
 def handle_bad_request(e):
     return redirect(url_for('index'))
 
