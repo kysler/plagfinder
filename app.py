@@ -1,4 +1,4 @@
-from flask import Flask, url_for, render_template, request, redirect, session, send_from_directory, abort, send_file
+from flask import Flask, url_for, render_template, request, redirect, session, send_from_directory, abort, send_file, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, DOCUMENTS
 from functools import wraps
@@ -101,7 +101,7 @@ def del_file(mapper, connection, target):
 	
 @app.errorhandler(500)
 def handle_bad_request(e):
-     flash('An error has occured, you are redirected back to the homepage.')
+    flash('An error has occured, you are redirected back to the homepage.')
     return redirect(url_for('index'))
 
 @app.route ( '/logout', methods=[ 'POST', 'GET'] )
