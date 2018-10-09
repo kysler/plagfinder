@@ -24,6 +24,7 @@ from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
 from flask_user.forms import RegisterForm, EditUserProfileForm, LoginForm
 from flask_mail import Mail
 from flask_user.email_adapters import SendgridEmailAdapter
+from flask_ckeditor import CKEditor, CKEditorField
 import os
 import os.path as op
 
