@@ -118,13 +118,15 @@ def index():
 @app.route ( '/homepage', methods=[ 'POST', 'GET' ] )
 @login_required
 def upload():
+    form = PostForm()
     if request.method == 'POST' and 'files' in request.files:
         filename = documents.save ( request.files[ 'files' ] )
-        output = googleSearch('tmp/uploads/' + filename)
-        return render_template('output.html', output = output)
+        output = mammoth.convert_to_html('tmp/uploads/' + filename)
+        html = output.value
+        return render_template('member.html', form=form, content=html)
     else:
-        return render_template ( 'member.html' )
-
+        return render_template ( 'member.html', form=form,)
+    
 @app.route('/results/')
 def return_files_tut():
 	return send_file('tmp\\result.log')
