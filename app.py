@@ -101,7 +101,7 @@ def del_file(mapper, connection, target):
 	
 @app.errorhandler(500)
 def handle_bad_request(e):
-    flash('An error has occured, you are redirected back to the homepage.')
+    flash('An error has occured, you are redirected back to the homepage.', 'error')
     return redirect(url_for('index'))
 
 @app.route ( '/logout', methods=[ 'POST', 'GET'] )
