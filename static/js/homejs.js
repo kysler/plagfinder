@@ -7,6 +7,11 @@ $(document).ready(function(){
         $("#upload:hidden").trigger('click');
     });
 	
+        $("#upload_link2").on('click', function(e){
+        e.preventDefault();
+        $("#display:hidden").trigger('click');
+    });
+	
     $("#button0").on('click', function(e){
         e.preventDefault();
         $(".scan:hidden").trigger('click');
