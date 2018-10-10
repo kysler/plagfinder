@@ -27,6 +27,7 @@ from flask_user.email_adapters import SendgridEmailAdapter
 from flask_ckeditor import CKEditor, CKEditorField
 import os
 import os.path as op
+import mammoth
 
 # Create Flask App
 app = Flask ( __name__ )
