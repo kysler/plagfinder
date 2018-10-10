@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<title>Thesis Project - Plagiarism Finder</title>
+<head>
+  
+<link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    
+
+
+    <!--icon css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="img/ncst.png"> PLAGIARISM FINDER</a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+                          <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.html">Home</a>
+            </li>
+                          <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#scan">SCAN</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 cursor" data-toggle="modal" data-target="#login">LOGIN</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>  
+    <!-- Scan Grid Section -->
+<section class="masthead" id="scan">
+      <div class="container">
+          <h2 id="space" class="text-center">Scan</h2>
+        <div class="row">
+  <input id="upload" type="file"/>
+  <div class="file-wells col-2" id="upload_link">
+      <table>
+              <tr><center><i class="fa fa-folder-open" style="font-size:60px;"></i></center></tr>
+          <tr><center><h3 style="color: #333">Open</h3></center></tr>
+
+        </table>
+    </div>
+            
+  <div class="file-wells col-2" id="button0">
+        <tr><center><i class="fa fa-pie-chart" style="font-size:60px;"></i></center></tr>
+        <tr><center><h3 style="color: #333">Scan file</h3></center></tr>
+     </div>
+            
+            <!--premium-->
+  <input id="display" type="button" data-toggle="modal" data-target="#myModal"/>
+  <div class="col-md-3 offset-md-3" id="upload_link2">
+      <h4 class="text-center" style="cursor: default; margin-top: 8%;">Get Premium!</h4>
+      <h4 class="text-center" style="cursor: default">Click Here</h4>
+    </div>
+            
+            
+        <!-- modal box-->
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content modal-lg">
+        <div class="modal-header modal-lg">
+            <h4 class="modal-title">Get Premium Subscriptions</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body modal-lg">
+          <h5>Select your preferred payment</h5>
+            <form id="premium">
+                <div class="row">
+                    <div class="col-lg-6">
+            <label for="m"><b>Monthly Subscription</b></label><br>
+            <input type="button" id="m" value="aaaa" style="display: inline-block;"><br><br><br>
+            <label for="a"><b>Monthly Subscription</b></label><br>
+            <input type="button" id="a" value="aaaa" style="display: inline-block;"><br>
+</div>
+                    <div class="col-lg-6">
+            <label for="c"><b>Monthly Subscription</b></label><br>
+            <input type="button" id="c" value="aaaa" style="display: inline-block;"><br><br><br>
+            <label for="x"><b>Monthly Subscription</b></label><br>
+            <input type="button" id="x" value="aaaa" style="display: inline-block;">
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="modal-footer modal-lg">
+          <button class="btn btn-default" data-dismiss="modal" style="background-color: white; border: 1px solid;">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+          <input id="upload" type="file"/>
+          <div href="" class="file-well col-12" id="upload_link1" style="margin-top:10%";>
+            <table>
+              <tr><center><i class="fa fa-cloud-upload" style="font-size:150px"></i></center></tr>
+              <hr width="45%"/>
+              <tr><center><h1 style="color: #D3D3D3">Upload a File to Scan</h1></center></tr>
+            </table>
+          </div>
+            <div class="file-well col-12" id="aaa" style="margin-bottom: 2%";>
+            <h6>Dito ung pangalan ng file</h6>
+                <h6>tas d2 sa baba ung link</h6>
+                <button class="bts">Scan Again</button>
+        <div class="my-progress-bar"></div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var progress_circle = $(".my-progress-bar").gmpc({
+});
+})
+    </script>
+
+        </div>
+    </div>
+
+    </div>
+    </section>
+
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <small>Copyright &copy; Plagiarism Finder-Thesis Project National College of Science and Technology 2018</small>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/freelancer.min.js"></script>
+
+    <!-- Pie Chart Jqueary -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="plugin.js"></script>
+    <script src="script.js"></script>
+    <script src="homejs.js"></script>
+    
+</body>
+</html>
+
