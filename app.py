@@ -40,6 +40,7 @@ except OSError:
 
 DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////flask_app.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config['SECRET_KEY'] = 'aynakoputanginasukungsukonaakosapunyetangthesisnato'
 
 documents = UploadSet('documents', DOCUMENTS)
 app.config['UPLOADED_DOCUMENTS_DEST'] = 'tmp/uploads'
