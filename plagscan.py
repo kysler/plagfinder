@@ -55,11 +55,9 @@ def plagscan(uploaded_file):
                 str3 = ''.join ( copied_list ) + '\n'
                 fullOutput2.append(str3)
                 str4 = ''.join (fullOutput2)
-                result = open ( 'tmp/result.log', "w", encoding='utf-8' )
-                result.write ( str4 )
 
     except docx.opc.exceptions.PackageNotFoundError:
         ctypes.windll.user32.MessageBoxW(0, "It's not a docx file!", "Not docx file!", 0)
 
     #THROWS THE OUTPUT TO MAIN FLASK PROGRAM
-    return fullOutput
+    return '[-]'.join(fullOutput)
