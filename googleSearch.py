@@ -1,6 +1,7 @@
 import urllib
 from nltk import tokenize
 from bs4 import BeautifulSoup
+from collections import OrderedDict
 import requests
 import glob
 import subprocess as sp
@@ -29,4 +30,18 @@ def googleSearch(uploaded_file):
         response = requests.get ( url )
         soup = BeautifulSoup(response.text, 'html.parser')
         links.append(soup.find('cite').text)
-    return links[0:5]
+        results = list(OrderedDict.fromkeys(links))[0:5]
+    return '[-]'.join(results)
+
+def searchText(uploaded_file):
+    text = uploaded_file
+    sentences = tokenize.sent_tokenize(text)
+    links = []
+    for item in sentences:
+        item = urllib.parse.quote_plus(item)
+        url = 'https://google.com/search?q=' + item
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        links.append(soup.find('cite').text)
+        results = list(OrderedDict.fromkeys(links))[0:5]
+    return '[-]'.join(results)
