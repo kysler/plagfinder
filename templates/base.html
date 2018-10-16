@@ -22,6 +22,7 @@
 {% endblock %}
 </head>
 <body id="page-top">
+{% block body %}
 {% block navbar %}
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
@@ -29,28 +30,22 @@
         <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="static/img/ncst.png"> Plagiarism Finder</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-    {% if call_or_get(current_user.is_authenticated) %}
-            <li class="nav-item mx-0 mx-lg-1">
-                <p class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" style="cursor: default; color:#fff">{{ current_user.username or current_user.email }}</p>
-              </li>
-             <li class="nav-item mx-0 mx-lg-1">
+    <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
             </li>
+    {% if call_or_get(current_user.is_authenticated) %}
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="scan.html">Scan</a>
+                <p class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">{{ current_user.username or current_user.email }}</p>
+              </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for ( 'testpage' ) }}">Scan</a>
             </li>
         <li class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.logout') }}" style="cursor: default; color:#fff">Sign out</a>
-            </li
     {% else %}
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-1">
-                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal" data-target="#login" style="cursor: pointer; color:#fff">Sign In</a>
-              </li>
-                {% endif %}
-
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal" data-target="#login" style="cursor: default; color:#fff">Sign In</a>
+              {% endif %}
+        </li>
           </ul>
         </div>
       </div>
@@ -59,7 +54,6 @@
 {% block modalform %}
 {% endblock %}
   <!-- header-->
-       {% block body %}
       <header class="masthead bg-primary text-white">
       <div class="container">
         {# One-time system messages called Flash messages #}
