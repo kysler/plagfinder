@@ -111,7 +111,7 @@ class Log(db.Model):
 
 # Setup Flask-User and specify the User data-model
 user_manager = UserManager(app, db, User)
-mail = Mail(app)
+user_manager.email_adapter = SendgridEmailAdapter(app)
 admin = Admin ( app, 'PlagFind Admin', url='/admin', endpoint="admin", template_mode='bootstrap3'  )
 
 def login_required(role="ANY"):
