@@ -2,7 +2,7 @@ from flask import Flask, url_for, render_template, request, redirect, session, s
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, DOCUMENTS
 from functools import wraps
-from googleSearch import googleSearch
+from googleSearch import googleSearch, searchText
 from flask_admin.form import rules
 from sqlalchemy.event import listens_for
 from jinja2 import Markup
