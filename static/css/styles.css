@@ -626,3 +626,21 @@ header.masthead {
     height: 100px;
     margin-top: 2%;
 }
+
+div.masthead {
+    padding-top: 100px;
+    padding-bottom: 3.55%;
+}
+
+.fgt {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #42a5f5;
+  width: 35%;
+  border: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight:bold;
+  color: #ffffff;
+}
