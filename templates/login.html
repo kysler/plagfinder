@@ -15,7 +15,6 @@
 
   <div class="modalform"> 
 {% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
-{% from flask_user.forms import ForgotPasswordForm %}
 <form action="{{ url_for('user.login') }}" method="POST" class="form" role="form">
     {{ login_form.hidden_tag() }}
       
@@ -26,8 +25,7 @@
     {# Password #}
      {{ render_field(login_form.password, tabindex=120) }}
      {% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
-        
-            <a data-dismiss="modal" data-toggle="modal" href="#forgot" class="cursor">
+            <a href="{{ url_for('user.forgot_password') }}" class="cursor">
             {%trans%}Forgot your Password?{%endtrans%}</a>
     {% endif %}
     {% if user_manager.USER_ENABLE_REMEMBER_ME %}
@@ -88,29 +86,4 @@
     </div>
 <!--end form-->
     
-    <!--forgot password form-->
-    <div class="modal fade" id="forgot" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">FORGOT PASSWORD</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-<div class="modalform">
-<form action="{{ url_for('user.forgot_password') }}" method="POST" class="form" role="form">
-    <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor"><-- Back to Login</a>
-    {{ ForgotPasswordForm.hidden_tag() }}
-    {{ render_field(ForgotPasswordForm.email, tabindex=10) }}
-    <input type="submit" value="SEND" class="submit">
-</form>
-         </div>
-  
-        </div>
-        </div>
-      </div>
-    </div>
-    <!--end form-->
 {% endblock %}
