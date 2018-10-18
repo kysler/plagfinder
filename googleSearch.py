@@ -32,7 +32,6 @@ def googleSearch(uploaded_file):
        soup = BeautifulSoup(response.text, 'html.parser')
        soup = BeautifulSoup(response.text, 'html.parser')    
        links.append(soup.find('cite').text)
-       print soup.find('cite').text
        results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
 
@@ -48,6 +47,5 @@ def searchText(uploaded_file):
        soup = BeautifulSoup(response.text, 'html.parser')
        soup = BeautifulSoup(response.text, 'html.parser')    
        links.append(soup.find('cite').text)
-       print soup.find('cite').text
        results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
