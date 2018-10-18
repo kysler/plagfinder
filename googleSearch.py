@@ -32,7 +32,7 @@ def googleSearch(uploaded_file):
         get_details = soup.find_all("div", attrs={"class": "g"})
         final_data = []
         for details in get_details:
-            link = details.find_all("h3").text
+            link = details.find_all("h3")
             # links = ""
             for mdetails in link:
                 links = mdetails.find_all("a")
@@ -41,7 +41,7 @@ def googleSearch(uploaded_file):
                     lmk = lnk.get("href")[7:].split("&")
                     sublist = []
                     sublist.append(lmk[0])
-                links.append = [sublist]
+                links.append = [sublist.str]
         results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
 
@@ -58,7 +58,7 @@ def searchText(uploaded_file):
         get_details = soup.find_all("div", attrs={"class": "g"})
         final_data = []
         for details in get_details:
-            link = details.find_all("h3").text
+            link = details.find_all("h3")
             # links = ""
             for mdetails in link:
                 links = mdetails.find_all("a")
@@ -67,6 +67,6 @@ def searchText(uploaded_file):
                     lmk = lnk.get("href")[7:].split("&")
                     sublist = []
                     sublist.append(lmk[0])
-                links.append = [sublist]
+                links.append = [sublist.str]
         results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
