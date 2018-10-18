@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {{ super() }}
-{% block body %}
+{% block contenters %}
 {% for list in results %}
     <a href = {{ url_for('finalized', pathname = list.id) }}><p>Result No.: {{list.id}}</p></a>
 {% endfor %}
