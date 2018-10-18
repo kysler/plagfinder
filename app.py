@@ -199,6 +199,17 @@ def testpage():
     else:
         return render_template ( 'scan.html', form=form, content='Type or upload.')
 
+@app.route('/scan/<int:pathname>')
+def finalized(pathname):
+    form = PostForm()
+    content = Results.query.filter_by(id=pathname).first()
+    return render_template('scan.html', form = form, content = content.html )
+
+
+@app.route ( '/list')
+def listahan():
+    return render_template('lists.html', results = Results.query.filter_by(user = current_user.username).all())
+
 # Create admin
 
 class UserView(sqla.ModelView):
