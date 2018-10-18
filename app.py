@@ -199,12 +199,12 @@ def testpage():
     else:
         return render_template ( 'scan.html', form=form, content='Type or upload.')
 
-@app.route('/scan/<int:pathname>')
+@app.route('/scanner/<int:pathname>')
 def finalized(pathname):
     form = PostForm()
     content = Results.query.filter_by(id=pathname).first()
-    return render_template('scan.html', form = form, content = content.html )
-
+    links = content.links.split("[-]")
+    return render_template('scan.html', form = form, content = content.html, links = links)
 
 @app.route ( '/list')
 def listahan():
