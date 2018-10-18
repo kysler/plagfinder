@@ -86,6 +86,9 @@
   </div>
           <!---WEBSITE LINK---->
             <div class="links col-12">
+                {% for items in links %}
+                <li>{{items}}</li>
+                {% endfor %}
             </div>
 
           <!---NCST DATABASE---->
