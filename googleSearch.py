@@ -32,7 +32,7 @@ def googleSearch(uploaded_file):
         get_details = soup.find_all("div", attrs={"class": "g"})
         final_data = []
         for details in get_details:
-            link = details.find_all("h3")
+            link = details.find_all("h3").text
             # links = ""
             for mdetails in link:
                 links = mdetails.find_all("a")
@@ -58,7 +58,7 @@ def searchText(uploaded_file):
         get_details = soup.find_all("div", attrs={"class": "g"})
         final_data = []
         for details in get_details:
-            link = details.find_all("h3")
+            link = details.find_all("h3").text
             # links = ""
             for mdetails in link:
                 links = mdetails.find_all("a")
