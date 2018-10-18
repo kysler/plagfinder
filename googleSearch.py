@@ -25,13 +25,24 @@ def googleSearch(uploaded_file):
     print(sentences)
     links = []
     for item in sentences:
-        item = urllib.parse.quote_plus( item )
-        url = 'https://google.com/search?q=' + item
-        response = requests.get ( url )
-        soup = BeautifulSoup(response.text, 'html.parser')
-        links.append(soup.find('cite').text)
-        results = list(OrderedDict.fromkeys(links))[0:5]
-    return '[-]'.join(results)
+        item = urllib.parse.quote_plus(item)
+        url = "https://google.com/search?q=" + item
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        get_details = soup.find_all("div", attrs={"class": "g"})
+        final_data = []
+        for details in get_details:
+            link = details.find_all("h3")
+            # links = ""
+            for mdetails in link:
+                links = mdetails.find_all("a")
+                lmk = ""
+                for lnk in links:
+                    lmk = lnk.get("href")[7:].split("&")
+                    sublist = []
+                    sublist.append(lmk[0])
+    return '[-]'.join(sublist)
+
 
 def searchText(uploaded_file):
     text = uploaded_file
@@ -39,11 +50,19 @@ def searchText(uploaded_file):
     links = []
     for item in sentences:
         item = urllib.parse.quote_plus(item)
-        url = 'https://google.com/search?q=' + item
+        url = "https://google.com/search?q=" + item
         response = requests.get(url)
-        soup = BeautifulSoup(response.text, 'html.parser')    
-        links.append(soup.find('cite').text)
-        for x in links:
-            print(x)
-        results = list(OrderedDict.fromkeys(links))[0:5]
-    return '[-]'.join(results)
+        soup = BeautifulSoup(response.text, "html.parser")
+        get_details = soup.find_all("div", attrs={"class": "g"})
+        final_data = []
+        for details in get_details:
+            link = details.find_all("h3")
+            # links = ""
+            for mdetails in link:
+                links = mdetails.find_all("a")
+                lmk = ""
+                for lnk in links:
+                    lmk = lnk.get("href")[7:].split("&")
+                    sublist = []
+                    sublist.append(lmk[0])
+    return '[-]'.join(sublist)
