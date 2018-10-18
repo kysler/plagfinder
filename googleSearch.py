@@ -10,6 +10,7 @@ import ctypes
 import docx
 import re
 import webbrowser
+from itertools import chain
 
 def getText(filename):
     doc = docx.Document(filename)
@@ -41,7 +42,8 @@ def googleSearch(uploaded_file):
                     lmk = lnk.get("href")[7:].split("&")
                     sublist = []
                     sublist.append(lmk[0])
-                links.append = [sublist.str]
+                links.append = [sublist]
+            list(chain(*links))
         results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
 
@@ -67,6 +69,7 @@ def searchText(uploaded_file):
                     lmk = lnk.get("href")[7:].split("&")
                     sublist = []
                     sublist.append(lmk[0])
-                links.append = [sublist.str]
+                links.append = [sublist]
+            list(chain(*links))
         results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
