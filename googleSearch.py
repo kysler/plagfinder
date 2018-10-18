@@ -44,6 +44,6 @@ def searchText(uploaded_file):
         soup = BeautifulSoup(response.text, 'html.parser')    
         links.append(soup.find('cite').text)
         for x in links:
-            print x
+            print(x)
         results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
