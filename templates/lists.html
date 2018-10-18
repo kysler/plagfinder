@@ -2,7 +2,7 @@
 {{ super() }}
 {% block contenters %}
 {% for list in results %}
-    <a href = {{ url_for('finalized', pathname = list.id) }}><p>Result No.: {{list.id}}</p></a>
+    <a href = {{ url_for('finalized', pathname = list.id) }}><p  style="color: #333;">Result No.: {{list.id}}</p></a>
 </div>
 {% endfor %}
 {% endblock %}
