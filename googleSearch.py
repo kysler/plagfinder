@@ -41,7 +41,9 @@ def googleSearch(uploaded_file):
                     lmk = lnk.get("href")[7:].split("&")
                     sublist = []
                     sublist.append(lmk[0])
-    return '[-]'.join(sublist)
+                links.append = [sublist]
+        results = list(OrderedDict.fromkeys(links))[0:5]
+    return '[-]'.join(results)
 
 
 def searchText(uploaded_file):
@@ -65,4 +67,6 @@ def searchText(uploaded_file):
                     lmk = lnk.get("href")[7:].split("&")
                     sublist = []
                     sublist.append(lmk[0])
-    return '[-]'.join(sublist)
+                links.append = [sublist]
+        results = list(OrderedDict.fromkeys(links))[0:5]
+    return '[-]'.join(results)
