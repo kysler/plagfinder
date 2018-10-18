@@ -29,8 +29,7 @@ def googleSearch(uploaded_file):
        item = urllib.parse.quote_plus(item)
        url = 'https://google.com/search?q=' + item
        response = requests.get(url)
-       soup = BeautifulSoup(response.text, 'html.parser')
-       soup = BeautifulSoup(response.text, 'html.parser')    
+       soup = BeautifulSoup(response.text, 'html.parser')  
        links.append(soup.find('cite').text)
        results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
@@ -44,8 +43,7 @@ def searchText(uploaded_file):
        item = urllib.parse.quote_plus(item)
        url = 'https://google.com/search?q=' + item
        response = requests.get(url)
-       soup = BeautifulSoup(response.text, 'html.parser')
-       soup = BeautifulSoup(response.text, 'html.parser')    
+       soup = BeautifulSoup(response.text, 'html.parser')   
        links.append(soup.find('cite').text)
        results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
