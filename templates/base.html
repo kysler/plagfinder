@@ -29,19 +29,22 @@
         <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="static/img/ncst.png"> Plagiarism Finder</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-    <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
-            </li>
     {% if call_or_get(current_user.is_authenticated) %}
             <li class="nav-item mx-0 mx-lg-1">
-                <a href="{{url_for('listahan')}}"><p class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">{{ current_user.username or current_user.email }}</p></a>
+                <a href="{{url_for('listahan')}}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">{{ current_user.username or current_user.email }}</a>
               </li>
+             <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for ( 'testpage' ) }}">Scan</a>
             </li>
         <li class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.logout') }}" style="cursor: default; color:#fff">Sign out</a>
     {% else %}
+               <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal" data-target="#login" style="cursor: default; color:#fff">Sign In</a>
               {% endif %}
         </li>
@@ -124,8 +127,7 @@
     </div>
     </section>
   <!--end-->
-  {% block textfield %}
-  {% endblock %}
+    
     <!--About Section-->
 <section class="bg-primary text-white text-center" id="about">
     <h2 class="mb-5">About Us</h2>
