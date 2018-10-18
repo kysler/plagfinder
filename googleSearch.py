@@ -45,7 +45,7 @@ def googleSearch(uploaded_file):
                 links.append = [sublist]
         list(chain(*links))
         results = list(OrderedDict.fromkeys(links))[0:5]
-    return '[-]'.join(results)
+    return '[-]'.join(str(results))
 
 
 def searchText(uploaded_file):
@@ -72,4 +72,4 @@ def searchText(uploaded_file):
                 links.append = [sublist]
         list(chain(*links))
         results = list(OrderedDict.fromkeys(links))[0:5]
-    return '[-]'.join(results)
+    return '[-]'.join(str(results))
