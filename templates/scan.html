@@ -84,16 +84,6 @@
 
     </div>
   </div>
-          <!---WEBSITE LINK---->
-            <div class="links col-12">
-                {% for items in links %}
-                <li><a href="{{items}}">{{items}}</a></li>
-                {% endfor %}
-            </div>
-
-          <!---NCST DATABASE---->
-            <div class="links col-12">
-            </div>
 
           <input id="upload" type="file"/>
           <div href="" class="file-well col-12" id="upload_link1" style="margin-top:5%";>
@@ -110,6 +100,18 @@
           </div>
           </div>
         </div>
+    
+              <!---WEBSITE LINK---->
+            <div class="links col-4">
+                {% for items in links %}
+                <li><a href="{{items}}">{{items}}</a></li>
+                {% endfor %}
+            </div>
+
+          <!---NCST DATABASE---->
+            <div class="links col-md-4 offset-md-3">
+            </div>
+    
     </div>
 
     </div>
