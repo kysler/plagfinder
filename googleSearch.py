@@ -59,6 +59,6 @@ def searchText(uploaded_file):
                 link = link['href']
                 title = title.get_text()
                 if link != '#':
-                    found_results.append({link})
+                    links.append({link})
     results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
