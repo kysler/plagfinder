@@ -35,7 +35,7 @@ def googleSearch(uploaded_file):
         if link and title:
             link = link['href']
             title = title.get_text()
-                if link != '#':
+            if link != '#':
                     links.append(link)
     results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
