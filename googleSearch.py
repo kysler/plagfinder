@@ -33,7 +33,7 @@ def googleSearch(uploaded_file):
             link = result.find('a', href=True)
             if link:
                 link = link['href']
-                if link != '#'
+                if link != '#':
                     links.append(link)
     results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
@@ -54,7 +54,7 @@ def searchText(uploaded_file):
             link = result.find('a', href=True)
             if link:
                 link = link['href']
-                if link != '#'
+                if link != '#':
                     links.append(link)
     results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
