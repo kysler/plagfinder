@@ -20,19 +20,24 @@ def getText(filename):
     return fullText
 
 def googleSearch(uploaded_file):
-    uploaded = getText(uploaded_file)
-    text = ''.join(uploaded)
+    text = uploaded_file
     sentences = tokenize.sent_tokenize(text)
-    print(sentences)
     links = []
     for item in sentences:
        item = urllib.parse.quote_plus(item)
-       url = 'https://google.com/search?q=' + item
+       url = google_url = 'https://www.google.com/search?q={}&num={}'.format(item, 1)
        response = requests.get(url)
-       soup = BeautifulSoup(response.text, 'html.parser')  
-       links.append(soup.find('cite').text)
+       soup = BeautifulSoup(response.text, 'html.parser')   
+       result_block = soup.find_all('div', attrs={'class': 'g'})
+       for result in result_block:
+          link = result.find('a', href=True)
+          if link:
+              link = link['href']
+            if link != '#'
+                links.append(link)
        results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
+
 
 
 def searchText(uploaded_file):
@@ -41,9 +46,15 @@ def searchText(uploaded_file):
     links = []
     for item in sentences:
        item = urllib.parse.quote_plus(item)
-       url = 'https://google.com/search?q=' + item
+       url = google_url = 'https://www.google.com/search?q={}&num={}'.format(item, 1)
        response = requests.get(url)
        soup = BeautifulSoup(response.text, 'html.parser')   
-       links.append(soup.find('cite').text)
+       result_block = soup.find_all('div', attrs={'class': 'g'})
+       for result in result_block:
+          link = result.find('a', href=True)
+          if link:
+              link = link['href']
+            if link != '#'
+                links.append(link)
        results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
