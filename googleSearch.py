@@ -31,8 +31,10 @@ def googleSearch(uploaded_file):
         result_block = soup.find_all('div', attrs={'class': 'g'})
         for result in result_block:
             link = result.find('a', href=True)
-            if link:
-                link = link['href']
+            title = result.find('h3', attrs={'class': 'r'})
+        if link and title:
+            link = link['href']
+            title = title.get_text()
                 if link != '#':
                     links.append(link)
     results = list(OrderedDict.fromkeys(links))[0:5]
@@ -52,8 +54,10 @@ def searchText(uploaded_file):
         result_block = soup.find_all('div', attrs={'class': 'g'})
         for result in result_block:
             link = result.find('a', href=True)
-            if link:
-                link = link['href']
+            title = result.find('h3', attrs={'class': 'r'})
+        if link and title:
+            link = link['href']
+            title = title.get_text()
                 if link != '#':
                     links.append(link)
     results = list(OrderedDict.fromkeys(links))[0:5]
