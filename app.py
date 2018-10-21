@@ -29,204 +29,190 @@ from bs4 import BeautifulSoup
 import os
 import os.path as op
 import mammoth
+import datetime
 
-# Create Flask App
-app = Flask ( __name__ )
+class configClass(object):
+    DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////flask_app.db')
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    SECRET_KEY = 'aynakoputanginasukungsukonaakosapunyetangthesisnato'
 
-file_path = op.join(op.dirname(__file__), 'files')
-try:
-    os.mkdir(file_path)
-except OSError:
-    pass
+    documents = UploadSet('documents', DOCUMENTS)
+    UPLOADED_DOCUMENTS_DEST = 'tmp/uploads'
 
-DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////flask_app.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-app.config['SECRET_KEY'] = 'aynakoputanginasukungsukonaakosapunyetangthesisnato'
+    CSRF_ENABLED = True
+    USER_ENABLE_USERNAME = True
+    USER_ENABLE_EMAIL = True
+    USER_EMAIL_SENDER_EMAIL = "shazodmzyt@gmail.com"
+    USER_APP_NAME = 'Plagiarism Finder'
+    USER_AFTER_REGISTER_ENDPOINT = 'index'
+    USER_AFTER_LOGIN_ENDPOINT = 'index'
+    USER_AFTER_LOGOUT_ENDPOINT = 'index'
+    SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
-documents = UploadSet('documents', DOCUMENTS)
-app.config['UPLOADED_DOCUMENTS_DEST'] = 'tmp/uploads'
-configure_uploads(app, documents)
-bootstrap = Bootstrap(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
+def create_app():
+    # Create Flask App
+    app = Flask(__name__)
+    app.config.from_object(__name__ + '.configClass')
+    app.config.from_pyfile('config.cfg')
+    db = SQLAlchemy(app)
+    ckeditor = CKEditor(app)
+    bootstrap = Bootstrap(app)
+    documents = UploadSet('documents', DOCUMENTS)
+    configure_uploads(app, documents)
 
-app.config['CSRF_ENABLED'] = True 
-app.config['USER_ENABLE_USERNAME'] = True
-app.config['USER_ENABLE_EMAIL'] = True
-app.config['USER_EMAIL_SENDER_EMAIL'] = "shazodmzyt@gmail.com"
-app.config['USER_APP_NAME'] = 'Plagiarism Finder'
-app.config['USER_AFTER_REGISTER_ENDPOINT'] = 'index'
-app.config['USER_AFTER_LOGIN_ENDPOINT'] = 'index'
-app.config['USER_AFTER_LOGOUT_ENDPOINT'] = 'index'
-app.config['SENDGRID_API_KEY'] = os.environ.get('SENDGRID_API_KEY')
-app.config.from_pyfile('config.cfg')
+    class User(db.Model, UserMixin):
+        __tablename__ = "user"
+        id = db.Column(db.Integer, primary_key=True)
+        active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
+        username = db.Column(db.String(255, collation='NOCASE'), nullable=False, unique=True)
+        email = db.Column(db.String(255), unique=True)
+        email_confirmed_at = db.Column(db.DateTime())
+        password = db.Column(db.String(255), nullable=False, server_default='')
+        roles = db.relationship('Role', secondary='user_roles')
 
-db = SQLAlchemy(app)
-ckeditor = CKEditor(app)
+    class Role(db.Model):
+        __tablename__ = 'roles'
+        id = db.Column(db.Integer(), primary_key=True)
+        name = db.Column(db.String(50), unique=True)
 
-# Create models
-class File(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode(64))
-    path = db.Column(db.Unicode(128))
-    def __unicode__(self):
-        return self.name
-
-class User(db.Model, UserMixin):
-    __tablename__ = "user"
-    id = db.Column(db.Integer, primary_key=True)
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='1')
-    username = db.Column(db.String(255), nullable=False, unique=True)
-    email = db.Column(db.String(255), unique=True)
-    email_confirmed_at = db.Column(db.DateTime())
-    password = db.Column(db.String(255), nullable=False, server_default='')
-    roles = db.Column(db.String(100), server_default='Student')
-
-    def __init__(self, roles):
-        self.roles = roles
-
-    def get_roles(self):
-        return self.roles
-
-'''
-	first_name = db.Column(db.String(100), nullable=False, server_default='')
-    last_name = db.Column(db.String(100), nullable=False, server_default='')
-    school = db.Column(db.String(100), nullable=False, server_default='')
-    course = db.Column(db.String(100), nullable=False, server_default='')
-'''
+    # Define the UserRoles association table
+    class UserRoles(db.Model):
+        __tablename__ = 'user_roles'
+        id = db.Column(db.Integer(), primary_key=True)
+        user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
+        role_id = db.Column(db.Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
 
 
-class Results(db.Model):
-    __tablename__ = "result"
-    id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.Integer, db.ForeignKey('user.username'))
-    html = db.Column(db.Unicode())
-    links = db.Column(db.Unicode())
-    docs = db.Column(db.Unicode())
+    class Results(db.Model):
+        __tablename__ = "result"
+        id = db.Column(db.Integer, primary_key=True)
+        user = db.Column(db.Integer, db.ForeignKey('user.username'))
+        html = db.Column(db.Unicode())
+        links = db.Column(db.Unicode())
+        docs = db.Column(db.Unicode())
 
-class Log(db.Model):
-    __tablename__="logs"
-    id = db.Column(db.Integer, primary_key=True)
-    message = db.Column(db.Unicode())
+    class Log(db.Model):
+        __tablename__="logs"
+        id = db.Column(db.Integer, primary_key=True)
+        message = db.Column(db.Unicode())
 
-# Setup Flask-User and specify the User data-model
-user_manager = UserManager(app, db, User)
-user_manager.email_adapter = SendgridEmailAdapter(app)
-admin = Admin ( app, 'PlagFind Admin', url='/admin', endpoint="admin", template_mode='bootstrap3'  )
+    # Setup Flask-User and specify the User data-model
+    user_manager = UserManager(app, db, User)
+    mail = Mail(app)
 
-def login_required(role="ANY"):
-    def wrapper(fn):
-        @wraps(fn)
-        def decorated_view(*args, **kwargs):
-            if not current_user.is_authenticated:
-                return current_app.login_manager.unauthorized()
-            if ((current_user.roles != role) and (role != "ANY")):
-                return current_app.login_manager.unauthorized()
-            return fn(*args, **kwargs)
-        return decorated_view
-    return wrapper
+    db.create_all()
 
-# Delete hooks for models, delete files if models are getting deleted
-@listens_for(File, 'after_delete')
-def del_file(mapper, connection, target):
-    if target.path:
-        try:
-            os.remove(op.join(file_path, target.path))
-        except OSError:
-            # Don't care if was not deleted because it does not exist
-            pass
-
-class PostForm(FlaskForm):
-    body = CKEditorField('Body', validators=[DataRequired()])
-    submit = SubmitField('Submit')
-
-@app.errorhandler(500)
-def handle_bad_request(e):
-    flash('An error has occured, you are redirected back to the homepage.', 'error')
-    return redirect(url_for('index'))
-
-@app.route ( '/logout', methods=[ 'POST', 'GET'] )
-@login_required(role="ANY")
-def logout ( ):
-    logout_user( )
-    return redirect ( url_for ( 'index' ) )
-
-@app.route ('/', methods=['POST', 'GET'])
-def index():
-    return redirect ( url_for ( 'user.login' ) )
-
-@app.route ( '/homepage', methods=[ 'POST', 'GET' ] )
-@login_required(role="ANY")
-def upload():
-    form = PostForm()
-    if request.method == 'POST' and 'files' in request.files:
-        filename = documents.save ( request.files[ 'files' ] )
-        output = mammoth.convert_to_html('tmp/uploads/' + filename)
-        html = output.value
-        return render_template('member.html', form=form, content=html)
-    else:
-        return render_template ( 'member.html', form=form, content='Type or upload.')
-    
-@app.route('/results')
-def return_files_tut():
-	return send_file('tmp\\results.log')
-
-@app.route('/admin')
-@login_required(role="Admin")
-def adminpage():
-	return render_template('admin/index.html')
-
-@app.route('/scan', methods=[ 'POST', 'GET' ])
-def testpage():
-    form = PostForm()
-    if request.method == 'POST' and 'files' in request.files:
-        filename = documents.save ( request.files[ 'files' ] )
-        output = mammoth.convert_to_html('tmp/uploads/' + filename)
-        html = output.value
-        return render_template('scan.html', form=form, content=html)
-
-    elif form.validate_on_submit():
-        user_id = current_user.username
-        html_data = form.body.data
-        soup = BeautifulSoup(html_data)
-        search = searchText(soup.get_text())
-        query = Results(user=user_id, html=html_data, links=search)
-        db.session.add(query)
+    if not User.query.filter(User.email == 'admin@example.com').first():
+        user = User(username = 'admin', email='admin@example.com', email_confirmed_at=datetime.datetime.utcnow(), password=user_manager.hash_password('Password1'))
+        user.roles.append(Role(name='Admin'))
+        db.session.add(user)
         db.session.commit()
-        return redirect(url_for('testpage'))
 
-    else:
-        return render_template ( 'scan.html', form=form, content='Type or upload.')
+    class PostForm(FlaskForm):
+        title = StringField('Title', validators=[DataRequired()])
+        body = CKEditorField('Body', validators=[DataRequired()])
+        submit = SubmitField('Submit')
 
-@app.route('/scanner/<int:pathname>')
-def finalized(pathname):
-    form = PostForm()
-    content = Results.query.filter_by(id=pathname).first()
-    links = content.links.split("[-]")
-    return render_template('scan.html', form = form, content = content.html, links = links)
+    @app.errorhandler(500)
+    def handle_bad_request(e):
+        flash('An error has occured, you are redirected back to the homepage.', 'error')
+        return redirect(url_for('index'))
 
-@app.route ( '/list')
-def listahan():
-    return render_template('lists.html', results = Results.query.filter_by(user = current_user.username).all())
+    @app.route ( '/logout', methods=[ 'POST', 'GET'] )
+    @login_required
+    def logout ( ):
+        logout_user( )
+        return redirect ( url_for ( 'index' ) )
 
-# Create admin
+    @app.route ('/', methods=['POST', 'GET'])
+    def index():
+        return redirect ( url_for ( 'user.login' ) )
 
-class UserView(sqla.ModelView):
-    column_searchable_list = ('id', 'username', 'email', 'roles')
-    column_display_pk = True
-    form_choices = {'course': [ ('Instructor', 'Instructor'), ('BSCS-SD', 'BSCS-SD'), ('BSCS-MGD', 'BSCS-MGD'), ('BSIT-SM', 'BSIT-SM'),
-                                    ('BSIT-CNS', 'BSIT-CNS')],
-                        'roles':[ ('Student', 'Student'), ('Admin', 'Admin')]}
+    @app.route ( '/homepage', methods=[ 'POST', 'GET' ] )
+    @login_required
+    def upload():
+        form = PostForm()
+        if request.method == 'POST' and 'files' in request.files:
+            filename = documents.save ( request.files[ 'files' ] )
+            output = mammoth.convert_to_html('tmp/uploads/' + filename)
+            html = output.value
+            return render_template('member.html', form=form, content=html)
+        else:
+            return render_template ( 'member.html', form=form, content='Type or upload.')
 
-# Add views
-admin.add_view (fileadmin.FileAdmin(file_path, name='Files'))
-admin.add_view ( UserView ( User, db.session, name='User', endpoint="Accounts" ) )
-admin.add_link ( MenuLink( name='Scan', url= '../../homepage', endpoint="Back to Index" ) )
-admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout" ) )
+    @app.route('/admin')
+    def adminpage():
+        return redirect(url_for('admin.index'))
+
+    @app.route('/scan', methods=[ 'POST', 'GET' ])
+    @login_required
+    def testpage():
+        form = PostForm()
+        if request.method == 'POST' and 'files' in request.files:
+            filename = documents.save ( request.files[ 'files' ] )
+            output = mammoth.convert_to_html('tmp/uploads/' + filename)
+            html = output.value
+            return render_template('scan.html', form=form, content=html)
+
+        elif form.validate_on_submit():
+            user_id = current_user.username
+            html_data = form.body.data
+            soup = BeautifulSoup(html_data)
+            search = searchText(soup.get_text())
+            query = Results(user=user_id, html=html_data, links=search)
+            db.session.add(query)
+            db.session.commit()
+            return redirect(url_for('testpage'))
+
+        else:
+            return render_template ( 'scan.html', form=form, content='Type or upload.')
+
+    @app.route('/scanner/<int:pathname>')
+    @login_required
+    def finalized(pathname):
+        form = PostForm()
+        if form.validate_on_submit():
+            user_id = current_user.username
+            html_data = form.body.data
+            soup = BeautifulSoup(html_data)
+            search = searchText(soup.get_text())
+            query = Results(user=user_id, html=html_data, links=search)
+            db.session.add(query)
+            db.session.commit()
+            return redirect(url_for('testpage'))
+        else:
+            content = Results.query.filter_by(id=pathname).first()
+            links = content.links.split("[-]")
+            return render_template('scan.html', form = form, content = content.html, links = links)
+
+    @app.route ( '/list')
+    @login_required
+    def listahan():
+        return render_template('lists.html', results = Results.query.filter_by(user = current_user.username).all())
+
+    # Create admin
+    class UserView(sqla.ModelView):
+        column_searchable_list = ('id', 'username', 'email')
+        column_display_pk = True
+        form_choices = {'course': [ ('Instructor', 'Instructor'), ('BSCS-SD', 'BSCS-SD'), ('BSCS-MGD', 'BSCS-MGD'), ('BSIT-SM', 'BSIT-SM'),
+                                        ('BSIT-CNS', 'BSIT-CNS')]}
+
+    class MyHomeView(AdminIndexView):
+        @expose('/')
+        @roles_required('Admin')
+        def adminIndex(self):
+            return self.render('admin/index.html')
+
+    # Add views
+    admin = Admin ( app, name = 'PlagFind Admin', index_view=MyHomeView(name="Plagfinder"), endpoint="admin", template_mode='bootstrap3'  )
+    admin.add_views (UserView( User, db.session, name='User'), fileadmin.FileAdmin(file_path, name='Files'))
+    admin.add_link ( MenuLink( name='Scan', url= '../../homepage' ))
+    admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout" ) )
+
+    return app
 
 if __name__ == "__main__":
-	db.create_all()
+    app = create_app()
 	app_dir = op.realpath ( os.path.dirname ( __file__ ) )
 	port = int(os.environ.get('PORT', 5000))
 	app.run(host='0.0.0.0', port=port, debug=True)
