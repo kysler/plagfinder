@@ -24,19 +24,8 @@ def googleSearch(uploaded_file):
     sentences = tokenize.sent_tokenize(text)
     links = []
     for item in sentences:
-        item = urllib.parse.quote_plus(item)
-        url = google_url = 'https://www.google.com/search?q={}&num={}'.format(item, 50)
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, 'html.parser')   
-        result_block = soup.find_all('div', attrs={'class': 'g'})
-        for result in result_block:
-            link = result.find('a', href=True)
-            title = result.find('h3', attrs={'class': 'r'})
-            if link and title:
-                link = link['href']
-                title = title.get_text()
-                if link != '#':
-                    links.append(link)
+        for url in search(item, stop=1):
+            links.append(url)
     results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
 
@@ -47,18 +36,7 @@ def searchText(uploaded_file):
     sentences = tokenize.sent_tokenize(text)
     links = []
     for item in sentences:
-        item = urllib.parse.quote_plus(item)
-        url = google_url = 'https://www.google.com/search?q={}&num={}'.format(item, 50)
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, 'html.parser')   
-        result_block = soup.find_all('div', attrs={'class': 'g'})
-        for result in result_block:
-            link = result.find('a', href=True)
-            title = result.find('h3', attrs={'class': 'r'})
-            if link and title:
-                link = link['href']
-                title = title.get_text()
-                if link != '#':
-                    links.append({link})
+        for url in search(item, stop=1):
+            links.append(url)
     results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
