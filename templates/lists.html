@@ -3,8 +3,19 @@
 {% block contenters %}
 </div>
 </div>
-{% for list in results %}
-    <a href = {{ url_for('finalized', pathname = list.id) }}><p  style="color: #333;">Result No.: {{list.id}}</p></a>
-{% endfor %}
 </header>
+<section class="masthead" id="scan">
+    <div class="container">
+    <div class="masthead">
+        <h1>Result:</h1>
+        <div id="box-container">
+            <div id="scroll-container">
+                {% for list in results %}
+                <a href = {{ url_for('finalized', pathname = list.id) }}><p  style="color: #333;">Result No.: {{list.id}}</p></a>
+                {% endfor %}
+            </div>
+        </div>       
+    </div>
+    </div>
+</section>
 {% endblock %}
