@@ -26,6 +26,7 @@ from flask_mail import Mail
 from flask_user.email_adapters import SendgridEmailAdapter
 from flask_ckeditor import CKEditor, CKEditorField
 from bs4 import BeautifulSoup
+from flask_migrate import Migrate
 import os
 import os.path as op
 import mammoth
@@ -49,12 +50,14 @@ class configClass(object):
     USER_AFTER_LOGOUT_ENDPOINT = 'index'
     SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
-def create_app(object):
+def create_app(config_class=Config):
     # Create Flask App
     app = Flask(__name__)
     app.config.from_object(__name__ + '.configClass')
     app.config.from_pyfile('config.cfg')
+    migrate = Migrate()
     db = SQLAlchemy(app)
+    migrate.init_app(app, db)
     ckeditor = CKEditor(app)
     bootstrap = Bootstrap(app)
     documents = UploadSet('documents', DOCUMENTS)
