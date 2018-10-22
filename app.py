@@ -9,7 +9,7 @@ from jinja2 import Markup
 from flask_admin import Admin, form
 from flask_admin.form import rules
 from flask_admin.contrib import sqla
-from flask_admin.base import MenuLink, Admin, BaseView, expose
+from flask_admin.base import MenuLink, Admin, BaseView, expose, AdminIndexView
 from flask_admin.contrib import fileadmin
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
