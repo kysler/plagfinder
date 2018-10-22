@@ -10,6 +10,7 @@ import ctypes
 import docx
 import re
 import webbrowser
+from googlesearch import search
 from itertools import chain
 
 def getText(filename):
