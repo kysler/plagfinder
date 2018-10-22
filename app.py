@@ -50,7 +50,7 @@ class configClass(object):
     USER_AFTER_LOGOUT_ENDPOINT = 'index'
     SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
-def create_app(config_class=Config):
+def create_app(config_class=configClass):
     # Create Flask App
     app = Flask(__name__)
     app.config.from_object(__name__ + '.configClass')
