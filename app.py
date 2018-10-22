@@ -98,11 +98,6 @@ def create_app(config_class=configClass):
         links = db.Column(db.Unicode())
         docs = db.Column(db.Unicode())
 
-    class Log(db.Model):
-        __tablename__="logs"
-        id = db.Column(db.Integer, primary_key=True)
-        message = db.Column(db.Unicode())
-
     # Setup Flask-User and specify the User data-model
     user_manager = UserManager(app, db, User)
     user_manager.email_adapter = SendgridEmailAdapter(app)
@@ -116,7 +111,6 @@ def create_app(config_class=configClass):
         db.session.commit()
 
     class PostForm(FlaskForm):
-        title = StringField('Title', validators=[DataRequired()])
         body = CKEditorField('Body', validators=[DataRequired()])
         submit = SubmitField('Submit')
 
