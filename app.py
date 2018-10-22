@@ -26,7 +26,8 @@ from flask_mail import Mail
 from flask_user.email_adapters import SendgridEmailAdapter
 from flask_ckeditor import CKEditor, CKEditorField
 from bs4 import BeautifulSoup
-from flask_migrate import Migrate
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
 import os
 import os.path as op
 import mammoth
@@ -59,7 +60,8 @@ def create_app(config_class=configClass):
     app.config.from_pyfile('config.cfg')
     migrate = Migrate()
     db = SQLAlchemy(app)
-    migrate.init_app(app, db)
+    manager = Manager(app)
+    manager.add_command('db', MigrateCommand)
     ckeditor = CKEditor(app)
     bootstrap = Bootstrap(app)
     documents = UploadSet('documents', DOCUMENTS)
@@ -218,6 +220,7 @@ def create_app(config_class=configClass):
 
 if __name__ == "__main__":
     app = create_app('app')
+    manager.run()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
 #Lol
