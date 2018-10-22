@@ -35,7 +35,7 @@ import datetime
 file_path = op.join(op.dirname(__file__), 'files')
 
 class configClass(object):
-    DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////flask_app.db')
+    DATABASE_URL = os.environ.get('DATABASE_URL')
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
     SECRET_KEY = 'aynakoputanginasukungsukonaakosapunyetangthesisnato'
 
