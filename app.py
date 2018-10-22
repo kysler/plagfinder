@@ -93,7 +93,7 @@ def create_app(config_class=configClass):
     class Results(db.Model):
         __tablename__ = "result"
         id = db.Column(db.Integer, primary_key=True)
-        user = db.Column(db.Integer, db.ForeignKey('user.username'))
+        user = db.Column(db.Unicode(), db.ForeignKey('user.username'))
         html = db.Column(db.Unicode())
         links = db.Column(db.Unicode())
         docs = db.Column(db.Unicode())
@@ -170,7 +170,7 @@ def create_app(config_class=configClass):
             db.session.add(query)
             db.session.commit()
             return redirect(url_for('testpage'))
-
+        
         else:
             return render_template ( 'scan.html', form=form, content='Type or upload.')
 
