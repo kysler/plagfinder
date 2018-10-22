@@ -49,7 +49,7 @@ class configClass(object):
     USER_AFTER_LOGOUT_ENDPOINT = 'index'
     SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
-def create_app():
+def create_app(object):
     # Create Flask App
     app = Flask(__name__)
     app.config.from_object(__name__ + '.configClass')
@@ -212,7 +212,6 @@ def create_app():
     return app
 
 if __name__ == "__main__":
-    app = create_app()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
 #Lol
