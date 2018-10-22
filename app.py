@@ -104,12 +104,6 @@ def create_app(config_class=configClass):
 
     db.create_all()
 
-    if not User.query.filter(User.email == 'admin@example.com').first():
-        user = User(username = 'admin', email='admin@example.com', email_confirmed_at=datetime.datetime.utcnow(), password=user_manager.hash_password('Password1'))
-        user.roles.append(Role(name='Admin'))
-        db.session.add(user)
-        db.session.commit()
-
     class PostForm(FlaskForm):
         body = CKEditorField('Body', validators=[DataRequired()])
         submit = SubmitField('Submit')
