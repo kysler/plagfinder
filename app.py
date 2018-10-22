@@ -32,6 +32,8 @@ import os.path as op
 import mammoth
 import datetime
 
+file_path = op.join(op.dirname(__file__), 'files')
+
 class configClass(object):
     DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:////flask_app.db')
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
