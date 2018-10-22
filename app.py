@@ -105,7 +105,7 @@ def create_app(config_class=configClass):
 
     # Setup Flask-User and specify the User data-model
     user_manager = UserManager(app, db, User)
-    mail = Mail(app)
+    user_manager.email_adapter = SendgridEmailAdapter(app)
 
     db.create_all()
 
