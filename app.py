@@ -26,17 +26,17 @@ from flask_mail import Mail
 from flask_user.email_adapters import SendgridEmailAdapter
 from flask_ckeditor import CKEditor, CKEditorField
 from bs4 import BeautifulSoup
-from flask_migrate import Migrate, MigrateCommand
-from flask_script import Manager
+from flask_migrate import Migrate
 import os
 import os.path as op
 import mammoth
 import datetime
 
 file_path = op.join(op.dirname(__file__), 'files')
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 class configClass(object):
-    DATABASE_URL = os.environ.get('DATABASE_URL')
+    DATABASE_URL = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
     SECRET_KEY = 'aynakoputanginasukungsukonaakosapunyetangthesisnato'
 
@@ -60,8 +60,7 @@ def create_app(config_class=configClass):
     app.config.from_pyfile('config.cfg')
     migrate = Migrate()
     db = SQLAlchemy(app)
-    manager = Manager(app)
-    manager.add_command('db', MigrateCommand)
+    migrate.init_app(app, db)
     ckeditor = CKEditor(app)
     bootstrap = Bootstrap(app)
     documents = UploadSet('documents', DOCUMENTS)
