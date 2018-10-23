@@ -645,3 +645,18 @@ div.masthead {
   font-weight:bold;
   color: #ffffff;
 }
+
+#box-container {
+  height: 251px;
+  width: 1100px;
+  padding: 1% 0 0 10%;
+  overflow: hidden;
+    
+}
+
+#scroll-container {
+    height: 245px;
+    width: 1100px;
+    overflow-y: scroll;
+}
+
