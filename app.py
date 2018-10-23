@@ -2,7 +2,7 @@ from flask import Flask, url_for, render_template, request, redirect, session, s
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, DOCUMENTS
 from functools import wraps
-from googleSearch import googleSearch, searchText
+from googleSearch import searchText
 from flask_admin.form import rules
 from sqlalchemy.event import listens_for
 from jinja2 import Markup
@@ -95,9 +95,10 @@ def create_app(config_class=configClass):
         __tablename__ = "result"
         id = db.Column(db.Integer, primary_key=True)
         user = db.Column(db.Unicode(), db.ForeignKey('user.username'))
-        html = db.Column(db.Unicode())
-        links = db.Column(db.Unicode())
-        docs = db.Column(db.Unicode())
+        html = db.Column(db.Unicode(), server_default='')
+        links = db.Column(db.Unicode(), server_default='')
+        docname = db.Column(db.Unicode(), server_default='')
+        copiedlines = db.Column(db.Unicode(), server_default='')
 
     # Setup Flask-User and specify the User data-model
     user_manager = UserManager(app, db, User)
@@ -155,8 +156,8 @@ def create_app(config_class=configClass):
             html_data = form.body.data
             soup = BeautifulSoup(html_data)
             search = searchText(soup.get_text())
-            docs = scan(soup.get_text())
-            query = Results(user=user_id, html=html_data, links=search, docs=docs)
+            docs, copied = scan(soup.get_text())
+            query = Results(user=user_id, html=html_data, links=search, docname=docs, copiedlines=copied)
             db.session.add(query)
             db.session.commit()
             return redirect(url_for('testpage'))
@@ -180,8 +181,9 @@ def create_app(config_class=configClass):
         else:
             content = Results.query.filter_by(id=pathname).first()
             links = content.links.split("[-]")
-            docname, copiedlist = content.docs
-            return render_template('scan.html', form = form, content = content.html, links = links, docname = docname, copiedlist = copiedlist)
+            docname = content.docname
+            copiedlines = content.copiedlines
+            return render_template('scan.html', form = form, content = content.html, links = links, docname = docname, copiedlines = copiedlines)
 
     @app.route ( '/list')
     @login_required
