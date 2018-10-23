@@ -17,7 +17,7 @@ def getText(filename):
     fullText = []
     for para in doc.paragraphs:
         fullText.append(para.text)
-    return fullText
+    return '\n'.join(fullText)
 
 #Main Plagiarism Scanner Function
 #Main Plagiarism Scanner Function
