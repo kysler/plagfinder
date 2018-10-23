@@ -3,19 +3,13 @@ import subprocess as sp
 import os
 import ctypes
 import docx
+from nltk import tokenize
 from fuzzywuzzy import fuzz, process
 import nltk
 
 #Function to call Cosine Similarity to gather results.
 def similar(a, b):
-    return fuzz.partial_token_sort_ratio(a,b)
-
-#Function to remove all files in upload folder
-def removefiles():
-    path = 'tmp/uploads'
-    for file in os.scandir ( path ):
-        if file.name.endswith ( ".docx" ):
-            os.unlink ( file.path )
+    return fuzz.partial_ratio(a,b)
 
 #Extracts text from .docx file
 def getText(filename):
@@ -26,38 +20,25 @@ def getText(filename):
     return fullText
 
 #Main Plagiarism Scanner Function
-def plagscan(uploaded_file):
-    result = open('result.log', "w")
-    result.writelines("")
-    result.close
-
-    try:
-        data = getText(uploaded_file)
-        counter = 0
-        fullOutput = [ ]
-        fullOutput2 = [ ]
-        for filename in glob.glob("files/*.docx"):
-            data2 = [ getText ( filename ) ]
+#Main Plagiarism Scanner Function
+def scan(textfile):
+    data = tokenize.sent_tokenize(textfile)
+    doclist = []
+    copiedlist = []
+    counter = 0
+    avg = 0
+    total_ratio = 0
+    for filename in glob.glob("files/*.docx"):
+        data2 = tokenize.sent_tokenize(getText(filename))
+        ratio = round(similar(data, data2), 2)
+        doc_name = filename.split('\\')[-1].split('.')[0]
+        if(ratio >= 40):
+            doclist.append(doc_name)
             counter += 1
-            ratio = round(similar(data, data2), 2)
-            doc_name = filename.split('\\')[-1].split('.')[0]
-            resultText = "Plagiarised Content Found in "+ filename.split('\\')[-1].split('.')[0] + " Results " + " || " + ratio.__str__()+"%" + '\n\n'
-
-            if(ratio >= 30):
-                fullOutput.append(doc_name)
-                fullOutput2.append(resultText)
-
-                for item in data:
-                    str1 = item.__str__()
-                    copied_line = process.extractOne ( str1, data2 )
-                    copied_list = copied_line.__str__()
-
-                str3 = ''.join ( copied_list ) + '\n'
-                fullOutput2.append(str3)
-                str4 = ''.join (fullOutput2)
-
-    except docx.opc.exceptions.PackageNotFoundError:
-        ctypes.windll.user32.MessageBoxW(0, "It's not a docx file!", "Not docx file!", 0)
-
-    #THROWS THE OUTPUT TO MAIN FLASK PROGRAM
-    return '[-]'.join(fullOutput)
+            total_ratio += ratio
+            for item in data:
+                copiedline = process.extractOne(item, data2)
+                stringedline = copiedline[0]
+                copiedlist.append(stringedline)
+    avg = round(total_ratio/counter, 2)
+    return doclist, copiedlist
