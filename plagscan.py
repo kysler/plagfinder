@@ -32,7 +32,7 @@ def plagscan(uploaded_file):
     result.close
 
     try:
-        data = [ getText(uploaded_file) ]
+        data = getText(uploaded_file)
         counter = 0
         fullOutput = [ ]
         fullOutput2 = [ ]
