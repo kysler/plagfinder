@@ -155,7 +155,7 @@ def create_app(config_class=configClass):
             html_data = form.body.data
             soup = BeautifulSoup(html_data)
             search = searchText(soup.get_text())
-            docs = scan(soup.get_text()
+            docs = scan(soup.get_text())
             query = Results(user=user_id, html=html_data, links=search, docs=docs)
             db.session.add(query)
             db.session.commit()
