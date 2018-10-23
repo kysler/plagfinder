@@ -27,6 +27,7 @@ from flask_user.email_adapters import SendgridEmailAdapter
 from flask_ckeditor import CKEditor, CKEditorField
 from bs4 import BeautifulSoup
 from flask_migrate import Migrate
+from plagscan import scan
 import os
 import os.path as op
 import mammoth
@@ -154,7 +155,8 @@ def create_app(config_class=configClass):
             html_data = form.body.data
             soup = BeautifulSoup(html_data)
             search = searchText(soup.get_text())
-            query = Results(user=user_id, html=html_data, links=search)
+            docs = scan(soup.get_text()
+            query = Results(user=user_id, html=html_data, links=search, docs=docs)
             db.session.add(query)
             db.session.commit()
             return redirect(url_for('testpage'))
@@ -178,7 +180,8 @@ def create_app(config_class=configClass):
         else:
             content = Results.query.filter_by(id=pathname).first()
             links = content.links.split("[-]")
-            return render_template('scan.html', form = form, content = content.html, links = links)
+            docname, copiedlist = content.docs
+            return render_template('scan.html', form = form, content = content.html, links = links, docname = docname, copiedlist = copiedlist)
 
     @app.route ( '/list')
     @login_required
@@ -189,8 +192,6 @@ def create_app(config_class=configClass):
     class UserView(sqla.ModelView):
         column_searchable_list = ('id', 'username', 'email')
         column_display_pk = True
-        form_choices = {'course': [ ('Instructor', 'Instructor'), ('BSCS-SD', 'BSCS-SD'), ('BSCS-MGD', 'BSCS-MGD'), ('BSIT-SM', 'BSIT-SM'),
-                                        ('BSIT-CNS', 'BSIT-CNS')]}
 
     class MyHomeView(AdminIndexView):
         @expose('/')
