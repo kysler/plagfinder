@@ -157,7 +157,7 @@ def create_app(config_class=configClass):
             soup = BeautifulSoup(html_data)
             search = searchText(soup.get_text())
             docs, copied = scan(soup.get_text())
-            query = Results(user=user_id, html=html_data, links=search, docname=docs, copiedlines=copied)
+            query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(docs), copiedlines='[-]'.join(copied))
             db.session.add(query)
             db.session.commit()
             return redirect(url_for('testpage'))
