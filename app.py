@@ -181,8 +181,8 @@ def create_app(config_class=configClass):
         else:
             content = Results.query.filter_by(id=pathname).first()
             links = content.links.split("[-]")
-            docname = content.docname
-            copiedlines = content.copiedlines
+            docname = content.docname.split("[-]")
+            copiedlines = content.copiedlines.split("[-]")
             return render_template('scan.html', form = form, content = content.html, links = links, docname = docname, copiedlines = copiedlines)
 
     @app.route ( '/list')
