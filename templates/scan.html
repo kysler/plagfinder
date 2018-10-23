@@ -103,13 +103,23 @@
     
               <!---WEBSITE LINK---->
             <div class="links col-4">
+                <ol>
                 {% for items in links %}
                 <li><a href="{{items}}">{{items}}</a></li>
                 {% endfor %}
+                </ol>
             </div>
 
           <!---NCST DATABASE---->
             <div class="links col-md-4 offset-md-3">
+            <dl>
+                {% for name in docname %}
+                    <dt>{{name}}</dt>
+                <% for copied in copiedlines %>
+                    <dd>{{copied}}</dd>
+                {% endfor %}
+                {% endfor %}
+            </dl>
             </div>
     
     </div>
