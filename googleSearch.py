@@ -13,23 +13,6 @@ import webbrowser
 import time
 from itertools import chain
 
-def getText(filename):
-    doc = docx.Document(filename)
-    fullText = []
-    for para in doc.paragraphs:
-        fullText.append(para.text)
-    return fullText
-
-def googleSearch(uploaded_file):
-    text = uploaded_file
-    sentences = tokenize.sent_tokenize(text)
-    links = []
-    for item in sentences:
-        for url in search(item, stop=1):
-            links.append(url)
-    results = list(OrderedDict.fromkeys(links))[0:5]
-    return '[-]'.join(results)
-
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'}
 
 def searchText(uploaded_file):
