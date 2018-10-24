@@ -54,6 +54,7 @@ class configClass(object):
     USER_AFTER_LOGOUT_ENDPOINT = 'index'
     SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
     include_schemas = True
+    CKEDITOR_HEIGHT = 500
 
 def create_app(config_class=configClass):
     # Create Flask App
