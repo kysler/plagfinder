@@ -40,5 +40,4 @@ def scan(textfile):
                 copiedline = process.extractOne(item, data2)
                 stringedline = copiedline[0]
                 copiedlist.append(stringedline)
-    avg = round(total_ratio/counter, 2)
     return doclist, copiedlist
