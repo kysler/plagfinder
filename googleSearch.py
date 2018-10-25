@@ -23,7 +23,7 @@ def searchText(uploaded_file):
         keyword = urllib.parse.quote_plus(item)
         google_url = 'https://www.google.com/search?q={}&num={}'.format(keyword, 1)
         r = requests.get(google_url, headers=headers)
-        soup = BeautifulSoup(r.text, 'lxml')
+        soup = BeautifulSoup(r.text, 'html.parser')
         url = soup.select('.r a')
         urlclean = url[0]['href']
         links.append(urlclean)
