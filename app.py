@@ -171,7 +171,7 @@ def create_app(config_class=configClass):
     def finalized(pathname):
         form = PostForm()
         if form.validate_on_submit():
-             user_id = current_user.username
+            user_id = current_user.username
             html_data = form.body.data
             soup = BeautifulSoup(html_data, "html.parser")
             search = searchText(soup.get_text())
