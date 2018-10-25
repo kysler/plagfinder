@@ -155,13 +155,13 @@ def create_app(config_class=configClass):
         elif form.validate_on_submit():
             user_id = current_user.username
             html_data = form.body.data
-            soup = BeautifulSoup(html_data)
+            soup = BeautifulSoup(html_data, "html.parser")
             search = searchText(soup.get_text())
             docs, copied = scan(soup.get_text())
             query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(docs), copiedlines='[-]'.join(copied))
             db.session.add(query)
             db.session.commit()
-            return redirect(url_for('testpage'))
+            return redirect(url_for('listahan'))
         
         else:
             return render_template ( 'scan.html', form=form, content='Type or upload.')
@@ -171,14 +171,15 @@ def create_app(config_class=configClass):
     def finalized(pathname):
         form = PostForm()
         if form.validate_on_submit():
-            user_id = current_user.username
+             user_id = current_user.username
             html_data = form.body.data
-            soup = BeautifulSoup(html_data)
+            soup = BeautifulSoup(html_data, "html.parser")
             search = searchText(soup.get_text())
-            query = Results(user=user_id, html=html_data, links=search)
+            docs, copied = scan(soup.get_text())
+            query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(docs), copiedlines='[-]'.join(copied))
             db.session.add(query)
             db.session.commit()
-            return redirect(url_for('testpage'))
+            return redirect(url_for('listahan'))
         else:
             content = Results.query.filter_by(id=pathname).first()
             links = content.links.split("[-]")
