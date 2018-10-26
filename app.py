@@ -170,7 +170,7 @@ def create_app(config_class=configClass):
             links = []
             docname = []
             copiedlines = []
-            return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines)
+            return render_template('scan.html', form = form, content = 'Type something.', links = links, docname = docname, copiedlines = copiedlines)
 
     @app.route('/scanner/<int:pathname>')
     @login_required
