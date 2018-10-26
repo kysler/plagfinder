@@ -150,7 +150,10 @@ def create_app(config_class=configClass):
             filename = documents.save ( request.files[ 'files' ] )
             output = mammoth.convert_to_html('tmp/uploads/' + filename)
             html = output.value
-            return render_template('scan.html', form=form, content=html)
+            links = []
+            docname = []
+            copiedlines = []
+            return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines)
 
         elif form.validate_on_submit():
             user_id = current_user.username
