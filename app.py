@@ -167,7 +167,10 @@ def create_app(config_class=configClass):
             return redirect(url_for('listahan'))
         
         else:
-            return render_template ( 'scan.html', form=form, content='Type or upload.')
+            links = []
+            docname = []
+            copiedlines = []
+            return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines)
 
     @app.route('/scanner/<int:pathname>')
     @login_required
