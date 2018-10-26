@@ -19,9 +19,10 @@ def searchText(uploaded_file):
     text = uploaded_file
     sentences = tokenize.sent_tokenize(text)
     links = []
+    print(sentences)
     for item in sentences:
         keyword = urllib.parse.quote_plus(item)
-        google_url = 'https://www.google.com/search?q={}&num={}'.format(keyword, 1)
+        google_url = 'https://www.google.com/search?q={}&num={}'.format(keyword, 5)
         r = requests.get(google_url, headers=headers)
         soup = BeautifulSoup(r.text, "html.parser")
         url = soup.select('.r a')
