@@ -12,6 +12,13 @@ $(document).ready(function(){
         $("#display:hidden").trigger('click');
     });
 	
+	$("#upload_link3").on('click', function(e){
+        e.preventDefault();
+        $("#display1:hidden").trigger('click');
+    });
+	
+	
+	
     $("#button0").on('click', function(e){
         e.preventDefault();
         $(".scan:hidden").trigger('click');
