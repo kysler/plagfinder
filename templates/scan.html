@@ -88,11 +88,10 @@
     </div>
   </div>
 
-            
-          <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-            <input type=file name="document">
-            <input type=submit name="button0">
-          </form>
+                <form method=POST enctype=multipart/form-data action="{{ url_for('testpage') }}">
+                    <input type=file name=file accept=".docx" class="btn">
+                    <input type=submit class="btn">
+                </form>
             
           <input id="upload" type="file"/>
           <div href="" class="file-well col-12" id="upload_link1" style="margin-top:5%";>
