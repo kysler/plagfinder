@@ -616,6 +616,10 @@ header.masthead {
     display: none
 }
 
+#display1 {
+    display: none
+}
+
 #upload_link2 {
     text-decoration:none;
 }
