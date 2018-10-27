@@ -7,7 +7,7 @@ from flask_admin.form import rules
 from sqlalchemy.event import listens_for
 from jinja2 import Markup
 from flask_admin import Admin, form
-from flask_admin.form import rules
+from flask_admin.form import rules, SecureForm
 from flask_admin.contrib import sqla
 from flask_admin.base import MenuLink, Admin, BaseView, expose, AdminIndexView
 from flask_admin.contrib import fileadmin
@@ -200,6 +200,7 @@ def create_app(config_class=configClass):
 
     # Create admin
     class UserView(sqla.ModelView):
+        form_base_class = SecureForm
         column_searchable_list = ('id', 'username', 'email')
         column_display_pk = True
 
