@@ -199,7 +199,7 @@ def create_app(config_class=configClass):
         return render_template('lists.html', results = Results.query.filter_by(user = current_user.username).all())
 
     class MyForm(FlaskForm):
-    def __init__(self, formdata=None, obj=None, prefix=u'', **kwargs):
+        def __init__(self, formdata=None, obj=None, prefix=u'', **kwargs):
         self._obj = obj
         super(MyForm, self).__init__(formdata=formdata, obj=obj, prefix=prefix, **kwargs)
 
