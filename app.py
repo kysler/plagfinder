@@ -204,6 +204,8 @@ def create_app(config_class=configClass):
         
     class RoleView(sqla.ModelView):
         column_display_pk = True
+        column_hide_backrefs = False
+        column_list = ('user_id', 'role_id')
 
     class MyHomeView(AdminIndexView):
         @expose('/')
