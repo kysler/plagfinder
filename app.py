@@ -198,13 +198,7 @@ def create_app(config_class=configClass):
     def listahan():
         return render_template('lists.html', results = Results.query.filter_by(user = current_user.username).all())
 
-    class MyForm(FlaskForm):
-        def __init__(self, formdata=None, obj=None, prefix=u'', **kwargs):
-            self._obj = obj
-            super(MyForm, self).__init__(formdata=formdata, obj=obj, prefix=prefix, **kwargs)
-
     class UserView(sqla.ModelView):
-        form_base_class = MyForm
         column_searchable_list = ('id', 'username', 'email')
         column_display_pk = True
 
