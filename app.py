@@ -200,8 +200,8 @@ def create_app(config_class=configClass):
 
     class MyForm(FlaskForm):
         def __init__(self, formdata=None, obj=None, prefix=u'', **kwargs):
-        self._obj = obj
-        super(MyForm, self).__init__(formdata=formdata, obj=obj, prefix=prefix, **kwargs)
+            self._obj = obj
+            super(MyForm, self).__init__(formdata=formdata, obj=obj, prefix=prefix, **kwargs)
 
     class UserView(sqla.ModelView):
         form_base_class = MyForm
