@@ -213,7 +213,7 @@ def create_app(config_class=configClass):
 
     # Add views
     admin = Admin ( app, name = 'PlagFind Admin', index_view=MyHomeView(name="Plagfinder"), endpoint="admin", template_mode='bootstrap3'  )
-    admin.add_views (UserView( User, db.session, name='User'), fileadmin.FileAdmin(file_path, name='Files'), RoleView(UserRoles, db.session, name='Roles')
+    admin.add_views (UserView( User, db.session, name='User'), fileadmin.FileAdmin(file_path, name='Files'), RoleView(UserRoles, db.session, name='Roles'))
     admin.add_link ( MenuLink( name='Scan', url= '../../homepage' ))
     admin.add_link ( MenuLink( name='Logout', url= '../../logout', endpoint="Logout" ) )
 
