@@ -13,7 +13,7 @@ import webbrowser
 import time
 from itertools import chain
 
-headers = {'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; vivo 1606 Build/MMB29M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36'}
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:52.0) Gecko/20100101 Firefox/52.0'}
 
 def searchText(uploaded_file):
     text = uploaded_file
