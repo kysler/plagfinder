@@ -5,7 +5,7 @@
 <!-- Navigation -->
  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="../static/img/logo1.png" style="width: 48px; height: 48px;"> Plagiarism Finder</a>
+        <a class="navbar-brand js-scroll-trigger" href="{{ url_for ( 'index' ) }}"><img src="../static/img/logo1.png" style="width: 48px; height: 48px;"> Plagiarism Finder</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
     {% if call_or_get(current_user.is_authenticated) %}
