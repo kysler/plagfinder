@@ -35,11 +35,11 @@
             <li class="nav-item mx-0 mx-lg-1">
                 <a href="{{url_for('listahan')}}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">{{ current_user.username or current_user.email }}</a>
               </li>
-             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
-            </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for ( 'testpage' ) }}">Scan</a>
+            </li>
+             <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
             </li>
         <li class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.logout') }}" style="cursor: default; color:#fff">Sign out</a>
