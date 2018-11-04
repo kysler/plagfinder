@@ -121,6 +121,10 @@ def create_app(config_class=configClass):
     def logout ( ):
         logout_user( )
         return redirect ( url_for ( 'index' ) )
+    
+    @app.route ('/terms', methods=['POST', 'GET'])
+    def terms():
+        return render_template('termsandconditions.html')
 
     @app.route ('/', methods=['POST', 'GET'])
     def index():
