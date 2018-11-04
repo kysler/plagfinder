@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+{{ super() }}
+{% block body %}
+<!-- Navigation -->
+ <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="../static/img/logo1.png" style="width: 48px; height: 48px;"> Plagiarism Finder</a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+    {% if call_or_get(current_user.is_authenticated) %}
+            <li class="nav-item mx-0 mx-lg-1">
+                <a href="{{url_for('listahan')}}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">{{ current_user.username or current_user.email }}</a>
+              </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for ( 'testpage' ) }}">Scan</a>
+            </li>
+             <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for ( 'index' ) }}">Home</a>
+            </li>
+        <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for('user.logout') }}" style="cursor: default; color:#fff">Sign out</a>
+    {% else %}
+               <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal" data-target="#login" style="cursor: default; color:#fff">Sign In</a>
+              {% endif %}
+        </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead text-white">
+      <div class="container">
+          <div class="text-center" style="color: #1c1c1c; font-size: 10px;">
+        <h1 class="text-uppercase mb-2">Terms & Conditions</h1>
+        </div>     
+      </div>
+    </header>
+
+ <section class="text-center" id="about" style="color: #1c1c1c;">
+    <div class="container">
+    <div class="row">
+        <div class="col-12" style="padding-bottom: 100px;">
+            <h6>This software is dedicated for the research of the National College of Science and Technology.  Any reproduction of this software without the any consultation of the developers is forbidden.</h6>
+            <h6>The users are not allowed to put any software, malware or viruses that can harm the software functionality.</h6>
+            <h6>Customizing interfaces should have authorization of the developers. Selling this software without asking the developers is forbidden, contact the developers as well as the College Department for commercializing the software.</h6>
+            <h6>Violators will be punished and will not be given a chance to use the system and the implementation process will terminated immediately.</h6>
+        </div>
+        </div>
+    </div>
+    </section>   
+{% endblock %}
