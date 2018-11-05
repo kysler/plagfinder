@@ -33,7 +33,7 @@
     {% endif %}
 
     {# Submit button #}
-    <input type="submit" value="LOGIN" class="submit">
+    <input type="submit" value="LOGIN" class="submit" />
     <button id="mybtn" data-dismiss="modal" data-toggle="modal" href="#register" class="cursor"><b>SIGN UP</b></button>
 </form>
         </div>
@@ -72,7 +72,7 @@
         {{ render_field(register_form.retype_password, tabindex=240) }}
     {% endif %}
 
-    <p style="font-size: 15px;"><input type="submit" value="Register" class="submit">
+    <p style="font-size: 15px;"><input type="submit" value="Register" class="submit" />
       <input type="checkbox" id="myCheck" required>I Agree to &nbsp<a href="{{ url_for('terms') }}" target="_blank" class="cursor" style="font-size: 15px;">Terms &amp; Conditions</a></p>
 </form>
 <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor">Already Registered?</a>
