@@ -99,7 +99,7 @@
             <form method="post">
               {{ form.csrf_token }}
               {{ form.body }}
-              {{ form.submit }}
+              <input type="submit" value="SUBMIT" class="submit" />
             </form>
             {{ ckeditor.load() }}
             {{ ckeditor.config(name='body', allowedContent = true) }}
