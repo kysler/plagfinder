@@ -5,6 +5,7 @@ import ctypes
 import docx
 from nltk import tokenize
 from fuzzywuzzy import fuzz, process
+from collections import OrderedDict
 import nltk
 
 #Function to call Cosine Similarity to gather results.
@@ -40,4 +41,6 @@ def scan(textfile):
                 copiedline = process.extractOne(item, data2)
                 stringedline = copiedline[0]
                 copiedlist.append(stringedline)
+    copiedlist = list(OrderedDict.fromkeys(copiedlist))
+    doclist = list(OrderedDict.fromkeys(doclist))
     return doclist, copiedlist
