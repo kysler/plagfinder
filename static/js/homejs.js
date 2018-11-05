@@ -46,4 +46,6 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
-
+function myFunction() {
+    var x = document.getElementById("myCheck").required;
+}
