@@ -32,7 +32,7 @@
         <div id="box-container">
             <div id="scroll-container">
                 {% for list in results %}
-                <a href = {{ url_for('finalized', pathname = list.id) }}><p  style="color: #333;">Result No.: {{list.id}}</p></a>
+                <a href = {{ url_for('finalized', pathname = list.id) }}><p  style="color: #333;">Result No.: {{loop.index}}</p></a>
                 {% endfor %}
             </div>
         </div>       
