@@ -45,12 +45,3 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
 }
-
-$('#more_info').change(function() {
-    if(this.checked != true){
-          $("#register").hide();
-     }
-  else{
-        $("#register").show();
-  }
-});
