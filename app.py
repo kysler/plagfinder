@@ -205,6 +205,9 @@ def create_app(config_class=configClass):
     class UserView(sqla.ModelView):
         column_searchable_list = ('id', 'username', 'email')
         column_display_pk = True
+        can_edit = False
+        can_create = False
+        can_delete = False
         
     class RoleView(sqla.ModelView):
         column_display_pk = True
