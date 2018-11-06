@@ -51,6 +51,6 @@ $('#more_info').change(function() {
           $("#register").hide();
      }
   else{
-        $("register").show();
+        $("#register").show();
   }
 });
