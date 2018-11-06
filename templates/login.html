@@ -55,6 +55,16 @@
         </div>
         <div class="modal-body">
 <div class="modalform">
+<script>
+function check(element) {
+var cb1 = document.getElementById("checkbox1");
+var sub = document.getElementById("reg_btoon");
+if (cb1.checked == true)
+    sub.disabled = false;
+else
+    sub.disabled = true;
+}
+</script>
 <form action="{{ url_for('user.register') }}" method="POST" novalidate formnovalidate class="form" role="form">
     {{ register_form.hidden_tag() }}
 
@@ -72,8 +82,8 @@
         {{ render_field(register_form.retype_password, tabindex=240) }}
     {% endif %}
 
-    <p style="font-size: 15px;"><input type="submit" class="submit" value="Register" />
-      By clicking register, you agree to <a href="{{ url_for('terms') }}" target="_blank" class="cursor" style="font-size: 15px;">Terms &amp; Conditions</a></p>
+    <p style="font-size: 15px;"><input id="reg_btoon" type="submit" class="submit" value="Register" />
+      <input id="checkbox1" type="checkbox" name="confirm1" value="confirm1" onclick="check();">Agree to <a href="{{ url_for('terms') }}" target="_blank" class="cursor" style="font-size: 15px;">Terms &amp; Conditions</a></p>
 </form>
 <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor">Already Registered?</a>
 </div>
