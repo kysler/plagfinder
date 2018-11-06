@@ -46,10 +46,11 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
-$('#accept').click(function() {
-	if ($('#submitbtn').is(':disabled')) {
-    	$('#submitbtn').removeAttr('disabled');
-    } else {
-    	$('#submitbtn').attr('disabled', 'disabled');
-    }
+$('#more_info').change(function() {
+    if(this.checked != true){
+          $("#register").hide();
+     }
+  else{
+        $("register").show();
+  }
 });
