@@ -46,7 +46,10 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
-function myFunction() {
-    var x = document.getElementById("myCheck").required;
-    document.getElementById("demo").innerHTML = x;
-}
+$('#accept').click(function() {
+	if ($('#submitbtn').is(':disabled')) {
+    	$('#submitbtn').removeAttr('disabled');
+    } else {
+    	$('#submitbtn').attr('disabled', 'disabled');
+    }
+});
