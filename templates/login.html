@@ -72,8 +72,8 @@
         {{ render_field(register_form.retype_password, tabindex=240) }}
     {% endif %}
 
-    <p style="font-size: 15px;"><input type="submit" value="Register" id="register" class="submit" disabled/>
-      <input type="checkbox" onchange="document.getElementById('register').disabled = !this.checked;" />I Agree to <a href="{{ url_for('terms') }}" target="_blank" class="cursor" style="font-size: 15px;">Terms &amp; Conditions</a></p>
+    <p style="font-size: 15px;"><input type="submit" value="Register" id="demo" class="submit" disabled />
+      <input type="checkbox" id="myCheck" name="test" required /> Agree to <a href="{{ url_for('terms') }}" target="_blank" class="cursor" style="font-size: 15px;">Terms &amp; Conditions</a></p>
 </form>
 <a data-dismiss="modal" data-toggle="modal" href="#login" class="cursor">Already Registered?</a>
 </div>
