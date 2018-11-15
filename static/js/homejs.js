@@ -17,7 +17,7 @@ $(document).ready(function(){
         $("#display1:hidden").trigger('click');
     });
     
-        $('.second.circle').circleProgress({
+        $('.percents').circleProgress({
     value: 1.0
   }).on('circle-animation-progress', function(event, progress) {
     $(this).find('strong').html(Math.round(100 * progress) + '<i>%</i>');
