@@ -120,12 +120,17 @@
 
 <div class="row">
     
-        <div class="col-2" style="margin-left: 7%;">
-    <center><h2 style=" margin-bottom: 15%;">Result:</h2>
-    <div class="second circle">
-      <strong></strong>
-      <span style="color: #333"><b>Plagiarized Contents</b></span>
-    </div></center>
+    <div class="col-2" style="margin-left: 7%;">
+    <center><h2 style="margin-bottom: 15%;">Result:</h2>
+<div>
+        <div class="my-progress-bar" ></div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var progress_circle = $(".my-progress-bar").gmpc({
+});
+        }) </script>
+        </div>
+</center>
     </div>
     
     
@@ -159,18 +164,7 @@
             </dl>
             </div>
 {% endif %}
-    
-    <script>
-    (function($) {
-
-  $('.second.circle').circleProgress({
-    value: 1.0
-  }).on('circle-animation-progress', function(event, progress) {
-    $(this).find('strong').html(Math.round(100 * progress) + '<i>%</i>');
-  });
-
-})(jQuery);
-    </script>
+   
 </div>
 
 
