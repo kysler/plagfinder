@@ -47,9 +47,13 @@
         <tr><center><i class="fa fa-pie-chart" style="font-size:60px;"></i></center></tr>
         <tr><center><h3 style="color: #333">Post file</h3></center></tr>
      </div>
+                    
+        <div style="margin-left: 25%" class="col-3" data-toggle="modal" data-target="#myModal">
+        <h4 style="text-align: center; padding-top: 15%; cursor: default">Get Premium <br> Click Here!</h4>
+     </div>
+       </div>
                </form>  
 
-            <!--premium-->
   
              </div>
         </div>
@@ -113,10 +117,19 @@
     </div>
 {% if not docname and links %}
 {% else %}
-        <center><h2>Result</h2></center>
 
 <div class="row">
-          <div class="links col-5" style="margin-left: 6.7%;">
+    
+        <div class="col-2" style="margin-left: 7%;">
+    <center><h2 style=" margin-bottom: 15%;">Result:</h2>
+    <div class="second circle">
+      <strong></strong>
+      <span style="color: #333"><b>Plagiarized Contents</b></span>
+    </div></center>
+    </div>
+    
+    
+          <div class="links col-4" style="margin-left: 1.7%;">
               <h4>Website Links</h4>
               {% if not links %}
               <h3>Nothing found</h3>
@@ -130,7 +143,7 @@
             </div>
 
           <!---NCST DATABASE---->
-            <div class="links col-5"  style="margin-left: 5%;">
+            <div class="links col-4"  style="margin-left: 2%;">
                 <h4>NCST Database links</h4>
                 {% if not docname %}
               <h3>Nothing found</h3>
