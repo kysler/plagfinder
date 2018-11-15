@@ -11,17 +11,18 @@ $(document).ready(function(){
         e.preventDefault();
         $("#display:hidden").trigger('click');
     });
-	
-	$("#upload_link3").on('click', function(e){
+    
+        $("#upload_link3").on('click', function(e){
         e.preventDefault();
         $("#display1:hidden").trigger('click');
     });
-	
-	 $('.second.circle').circleProgress({
+    
+        $('.second.circle').circleProgress({
     value: 1.0
   }).on('circle-animation-progress', function(event, progress) {
     $(this).find('strong').html(Math.round(100 * progress) + '<i>%</i>');
   });
+
 
 });
 
