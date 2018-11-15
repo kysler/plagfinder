@@ -17,10 +17,10 @@ $(document).ready(function(){
         $("#display1:hidden").trigger('click');
     });
     
-        $('.percents').circleProgress({
+  $('.second.circle').circleProgress({
     value: 1.0
   }).on('circle-animation-progress', function(event, progress) {
-    $(this).find('#percentss').html(Math.round(100 * progress) + '<i>%</i>');
+    $(this).find('strong').html(Math.round(100 * progress) + '<i>%</i>');
   });
 
 
