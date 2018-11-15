@@ -649,41 +649,27 @@ img {vertical-align: middle;}
   .prev, .next,.text {font-size: 11px}
 }
 
-.circles {
-  margin-bottom: -10px;
-}
-
-.circle {
-  width: 100px;
-  margin: 6px 6px 20px;
-  display: inline-block;
+.my-progress-bar
+{
   position: relative;
-  text-align: center;
-  line-height: 1.2;
+    width: 110px;
+    height: 110px;
 }
 
-.circle canvas {
-  vertical-align: top;
-}
-
-.circle strong {
+.progress-percentage
+{
   position: absolute;
-  top: 30px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  line-height: 40px;
-  font-size: 30px;
+    top: 95px;
+    left: 100px;
+  transform: translate(-53%,-50%);
+  font-size: 20px;
 }
 
-.circle strong i {
-  font-style: normal;
-  font-size: 0.6em;
-  font-weight: normal;
-}
-
-.circle span {
-  display: block;
-  color: #aaa;
-  margin-top: 12px;
+.my-progress-bar canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  height: 190px;
+  width: 190px;
+}gin-top: 12px;
 }
