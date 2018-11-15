@@ -159,6 +159,18 @@
             </dl>
             </div>
 {% endif %}
+    
+    <script>
+    (function($) {
+
+  $('.second.circle').circleProgress({
+    value: 1.0
+  }).on('circle-animation-progress', function(event, progress) {
+    $(this).find('strong').html(Math.round(100 * progress) + '<i>%</i>');
+  });
+
+})(jQuery);
+    </script>
 </div>
 
 
