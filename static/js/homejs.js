@@ -20,7 +20,7 @@ $(document).ready(function(){
         $('.percents').circleProgress({
     value: 1.0
   }).on('circle-animation-progress', function(event, progress) {
-    $(this).find('strong').html(Math.round(100 * progress) + '<i>%</i>');
+    $(this).find('#percentss').html(Math.round(100 * progress) + '<i>%</i>');
   });
 
 
