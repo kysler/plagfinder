@@ -13,29 +13,7 @@ h6 {
   font-family: 'Montserrat';
 }
 
-.my-progress-bar
-{
-  position: absolute;
-  top: 77%;
-  left: 87%;
-  transform: translate(-50%,-50%);
-}
-
-.progress-percentage
-{
-  position: absolute;
-  top: 28%;
-  left: 30%;
-  transform: translate(-53%,-50%);
-  font-size: 35px;
-}
-
-.file-well .my-progress-bar canvas {
-
-  height: 170px;
-  width: 170px;
-}
-
+.
 .scanbox{
   height: 150px;
   width: 30%;
@@ -49,57 +27,6 @@ h6 {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   margin-top: 1.5em;
 
-}
-
-hr.star-light,
-hr.star-dark,
-hr.star-star {
-  max-width: 15rem;
-  padding: 0;
-  text-align: center;
-  border: none;
-  border-top: solid 0.25rem;
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-
-hr.star-light:after,
-hr.star-dark:after,
-hr.star-star:after {
-  position: relative;
-  top: -.8em;
-  display: inline-block;
-  padding: 0 0.25em;
-  content: '\f005';
-  font-family: FontAwesome;
-  font-size: 2em;
-}
-
-hr.star-light {
-  border-color: #fff;
-}
-
-hr.star-light:after {
-  color: #fff;
-  background-color: #42a5f5;
-}
-
-hr.star-dark {
-  border-color: #fff;
-}
-
-hr.star-dark:after {
-  color: #fff;
-  background-color: #2C3E50;
-}
-
-hr.star-star {
-  border-color: #2C3E50;
-}
-
-hr.star-star:after {
-  color: #2C3E50;
-  background-color: #fff;
 }
 
 section {
@@ -739,7 +666,7 @@ img {vertical-align: middle;}
   vertical-align: top;
 }
 
-.circle strong {
+#percentss {
   position: absolute;
   top: 30px;
   left: 0;
@@ -749,7 +676,7 @@ img {vertical-align: middle;}
   font-size: 30px;
 }
 
-.circle strong i {
+#percentss i {
   font-style: normal;
   font-size: 0.6em;
   font-weight: normal;
@@ -760,5 +687,3 @@ img {vertical-align: middle;}
   color: #aaa;
   margin-top: 12px;
 }
-
-CSS
