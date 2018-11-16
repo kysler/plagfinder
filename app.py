@@ -157,7 +157,8 @@ def create_app(config_class=configClass):
             links = []
             docname = []
             copiedlines = []
-            return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines)
+            per = 0
+            return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines, per = per)
 
         elif form.validate_on_submit():
             user_id = current_user.username
