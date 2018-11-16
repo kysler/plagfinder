@@ -137,6 +137,7 @@
         </div>
     
     </div>
+{% block resultblock %}
 {% if not docname and links %}
 {% else %}
 
@@ -156,8 +157,6 @@
         </div>
 </center>
     </div>
-    
-    
           <div class="links col-4" style="margin-left: 1.7%;">
               <h4>Website Links</h4>
               {% if not links %}
@@ -190,6 +189,7 @@
 {% endif %}
    
 </div>
+{% endblock %}
 
 
     </div>
