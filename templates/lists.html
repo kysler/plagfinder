@@ -30,16 +30,19 @@
     <div class="masthead">
         <h1>Result:</h1>
         <div id="box-container">
-
+            <div id="scroll-container">
+                {% for list in results %}
+                <a href = {{ url_for('finalized', pathname = list.id) }}><p  style="color: #333;">Result No.: {{loop.index}}</p></a>
+                {% endfor %}
             </div>
-<div class="row">
+  <div class="row">
   
     
     <div class="col-2" style="margin-left: 7%;">
     <center><h2 style="margin-bottom: 15%;">Result:</h2>
 <div>
     <h6>Plagiarized Contents</h6>
-        <div id="test-circle" data-percent=></div>
+        <div id="test-circle" data-percent={{per}}></div>
 <script>
     $( document ).ready(function() { // 6,32 5,38 2,34
         $("#test-circle").circliful({
@@ -60,35 +63,36 @@
     </div>
           <div class="links col-4" style="margin-left: 1.7%;">
               <h4>Website Links</h4>
-             
+              {% if not links %}
               <h6>Nothing found</h6>
-              
+              {% else %}
                 <ol>
-
-                <li><a href=""></a></li>
-           
+                {% for items in links %}
+                <li><a href="{{items}}">{{items}}</a></li>
+                {% endfor %}
                 </ol>
-            
+              {% endif %}
             </div>
 
           <!---NCST DATABASE---->
             <div class="links col-4"  style="margin-left: 2%;">
                 <h4>NCST Database links</h4>
-               
+                {% if not docname %}
               <h6>Nothing found</h6>
-             
+              {% else %}
             <dl>
-                
-                    <dt></dt>
-       
-                    <dd></dd>
-
+                {% for name in docname %}
+                    <dt>{{name}}</dt>
+                {% for copied in copiedlines %}
+                    <dd>{{copied}}</dd>
+                {% endfor %}
+                {% endfor %}
+              {% endif %}
             </dl>
             </div>
-
+{% endif %}
    
 </div>
-        </div>       
     </div>
     </div>
 </section>
