@@ -30,10 +30,7 @@
     <div class="masthead">
         <h1>Result:</h1>
         <div id="box-container">
-            <div id="scroll-container">
-                {% for list in results %}
-                <a href = {{ url_for('finalized', pathname = list.id) }}><p  style="color: #333;">Result No.: {{loop.index}}</p></a>
-                {% endfor %}
+
             </div>
 <div class="row">
   
