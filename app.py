@@ -48,7 +48,7 @@ class configClass(object):
 
     documents = UploadSet('documents', DOCUMENTS)
     UPLOADED_DOCUMENTS_DEST = 'tmp/uploads'
-
+    QUEUES = ['default']
     CSRF_ENABLED = True
     USER_ENABLE_USERNAME = True
     USER_ENABLE_EMAIL = True
@@ -177,7 +177,7 @@ def create_app(config_class=configClass):
             return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines, per = per)
 
         elif form.validate_on_submit():
-            job = q.enqueue_call(Scan, form.body.data)
+            result = q.enqueue_call(Scan, form.body.data)
             return redirect(url_for('listahan'))
         
         else:
@@ -191,7 +191,7 @@ def create_app(config_class=configClass):
     def finalized(pathname):
         form = PostForm()
         if form.validate_on_submit():
-            job = q.enqueue_call(Scan, form.body.data)
+            result = q.enqueue_call(Scan, form.body.data)
             return redirect(url_for('listahan'))
         else:
             content = Results.query.filter_by(id=pathname).first()
