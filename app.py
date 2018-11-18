@@ -100,6 +100,7 @@ def create_app(config_class=configClass):
         links = db.Column(db.Unicode(), server_default='')
         docname = db.Column(db.Unicode(), server_default='')
         copiedlines = db.Column(db.Unicode(), server_default='')
+        percentage = db.Column(db.Integer, server_default=0)
 
     # Setup Flask-User and specify the User data-model
     user_manager = UserManager(app, db, User)
@@ -182,14 +183,7 @@ def create_app(config_class=configClass):
     def finalized(pathname):
         form = PostForm()
         if form.validate_on_submit():
-            user_id = current_user.username
-            html_data = form.body.data
-            soup = BeautifulSoup(html_data, "html.parser")
-            search = searchText(soup.get_text())
-            docs, copied = scan(soup.get_text())
-            query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(docs), copiedlines='[-]'.join(copied))
-            db.session.add(query)
-            db.session.commit()
+            Scan(form.body.data)
             return redirect(url_for('listahan'))
         else:
             content = Results.query.filter_by(id=pathname).first()
@@ -197,7 +191,17 @@ def create_app(config_class=configClass):
             docname = content.docname.split("[-]")
             copiedlines = content.copiedlines.split("[-]")
             return render_template('scan.html', form = form, content = content.html, links = links, docname = docname, copiedlines = copiedlines)
-
+    
+    def Scan(text):
+        user_id = current_user.username
+        html_data = text
+        soup = BeautifulSoup(html_data, "html.parser")
+        search = searchText(soup.get_text())
+        doc_texts=scan(text)
+        query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(doc_texts)[0], copiedlines='[-]'.join(doc_texts)[1], percentage=doc_texts[2])
+        db.session.add(query)
+        db.session.commit()
+    
     @app.route ( '/list')
     @login_required
     def listahan():
