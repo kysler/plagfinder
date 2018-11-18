@@ -54,10 +54,9 @@
           <h2 id="space" class="text-center">Scan</h2>
         <div class="row">
             
-            <div class="col-12">
-   <form method=POST enctype=multipart/form-data action="{{ url_for('testpage') }}">             
+            <div class="col-12">           
                 <div class="row">
-        <input id="upload" type="file" name="files" accept=".docx"/>
+
   <div class="file-wells col-2" id="upload_link">
       <table>
               <tr><center><i class="fa fa-folder-open" style="font-size:60px;"></i></center></tr>
@@ -66,18 +65,22 @@
         </table>
     </div>
 
-   <input id="display1" type="submit"/>  
+   
         <div class="file-wells col-2" id="upload_link3">
         <tr><center><i class="fa fa-pie-chart" style="font-size:60px;"></i></center></tr>
         <tr><center><h3 style="color: #333">Post file</h3></center></tr>
      </div>
-     </form> 
+               
+               <form method=POST enctype=multipart/form-data action="{{ url_for('testpage') }}">
+               <input id="upload" type="file" name="files" accept=".docx"/>
+               <input id="display1" type="submit"/>  
+               </form>
                     
         <div style="margin-left: 25%" class="col-3" data-toggle="modal" data-target="#myModal">
         <h4 style="text-align: center; padding-top: 15%; cursor: default">Get Premium <br> Click Here!</h4>
      </div>
        </div>
-              
+                
 
   
              </div>
