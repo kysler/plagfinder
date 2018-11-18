@@ -28,11 +28,16 @@ from flask_ckeditor import CKEditor, CKEditorField
 from bs4 import BeautifulSoup
 from flask_migrate import Migrate
 from plagscan import scan
+from redis import Redis
+from rq import Queue
+from rq.job import Job
+from worker import conn
 import os
 import os.path as op
 import mammoth
 import datetime
 
+q = Queue(connection=conn)
 file_path = op.join(op.dirname(__file__), 'files')
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -111,6 +116,16 @@ def create_app(config_class=configClass):
     class PostForm(FlaskForm):
         body = CKEditorField('Body', validators=[DataRequired()])
         submit = SubmitField('Submit')
+    
+    def Scan(text):
+        user_id = current_user.username
+        html_data = text
+        soup = BeautifulSoup(html_data, "html.parser")
+        search = searchText(soup.get_text())
+        doc_texts=scan(text)
+        query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(doc_texts)[0], copiedlines='[-]'.join(doc_texts)[1], percentage=doc_texts[2])
+        db.session.add(query)
+        db.session.commit()
 
     @app.errorhandler(500)
     def handle_bad_request(e):
@@ -162,14 +177,7 @@ def create_app(config_class=configClass):
             return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines, per = per)
 
         elif form.validate_on_submit():
-            user_id = current_user.username
-            html_data = form.body.data
-            soup = BeautifulSoup(html_data, "html.parser")
-            search = searchText(soup.get_text())
-            docs, copied = scan(soup.get_text())
-            query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(docs), copiedlines='[-]'.join(copied))
-            db.session.add(query)
-            db.session.commit()
+            job = q.enqueue_call(Scan, form.body.data)
             return redirect(url_for('listahan'))
         
         else:
@@ -183,7 +191,7 @@ def create_app(config_class=configClass):
     def finalized(pathname):
         form = PostForm()
         if form.validate_on_submit():
-            Scan(form.body.data)
+            job = q.enqueue_call(Scan, form.body.data)
             return redirect(url_for('listahan'))
         else:
             content = Results.query.filter_by(id=pathname).first()
@@ -191,16 +199,6 @@ def create_app(config_class=configClass):
             docname = content.docname.split("[-]")
             copiedlines = content.copiedlines.split("[-]")
             return render_template('scan.html', form = form, content = content.html, links = links, docname = docname, copiedlines = copiedlines)
-    
-    def Scan(text):
-        user_id = current_user.username
-        html_data = text
-        soup = BeautifulSoup(html_data, "html.parser")
-        search = searchText(soup.get_text())
-        doc_texts=scan(text)
-        query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(doc_texts)[0], copiedlines='[-]'.join(doc_texts)[1], percentage=doc_texts[2])
-        db.session.add(query)
-        db.session.commit()
     
     @app.route ( '/list')
     @login_required
