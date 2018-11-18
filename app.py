@@ -172,8 +172,8 @@ def create_app(config_class=configClass):
             text = soup.get_text()
             search = searchText(text)
             doc_texts=scan(text)
-            docname = '[-]'.join(doc_texts)[0]
-            copiedlines = '[-]'.join(doc_texts)[1]
+            docname = '[-]'.join(map(str,doc_texts))[0]
+            copiedlines = '[-]'.join(map(str,doc_texts))[1]
             percentage = doc_texts[2]
             query = Results(user=user_id, html=html_data, links=search, docname=docname, copiedlines=copiedlines, percentage=percentage)
             db.session.add(query)
@@ -191,8 +191,18 @@ def create_app(config_class=configClass):
     def finalized(pathname):
         form = PostForm()
         if form.validate_on_submit():
-            q = Queue(connection=conn)
-            result = q.enqueue_call(Scan, args=(self,))
+            user_id = current_user.username
+            html_data = form.body.data
+            soup = BeautifulSoup(html_data, "html.parser")
+            text = soup.get_text()
+            search = searchText(text)
+            doc_texts=scan(text)
+            docname = '[-]'.join(map(str,doc_texts))[0]
+            copiedlines = '[-]'.join(map(str,doc_texts))[1]
+            percentage = doc_texts[2]
+            query = Results(user=user_id, html=html_data, links=search, docname=docname, copiedlines=copiedlines, percentage=percentage)
+            db.session.add(query)
+            db.session.commit()
             return redirect(url_for('listahan'))
         else:
             content = Results.query.filter_by(id=pathname).first()
