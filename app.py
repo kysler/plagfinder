@@ -167,7 +167,7 @@ def create_app(config_class=configClass):
 
         elif form.validate_on_submit():
             user_id = current_user.username
-            html_data = text
+            html_data = form.body.data
             soup = BeautifulSoup(html_data, "html.parser")
             text = soup.get_text()
             search = searchText(text)
