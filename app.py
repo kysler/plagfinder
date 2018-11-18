@@ -209,7 +209,8 @@ def create_app(config_class=configClass):
             links = content.links.split("[-]")
             docname = content.docname.split("[-]")
             copiedlines = content.copiedlines.split("[-]")
-            return render_template('scan.html', form = form, content = content.html, links = links, docname = docname, copiedlines = copiedlines)
+            per = content.percentage
+            return render_template('scan.html', form = form, content = content.html, links = links, docname = docname, copiedlines = copiedlines, per=per)
     
     @app.route ( '/list')
     @login_required
