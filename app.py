@@ -172,7 +172,10 @@ def create_app(config_class=configClass):
             text = soup.get_text()
             search = searchText(text)
             doc_texts=scan(text)
-            query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(doc_texts)[0], copiedlines='[-]'.join(doc_texts)[1], percentage=doc_texts[2])
+            docname = '[-]'.join(doc_texts)[0]
+            copiedlines = '[-]'.join(doc_texts)[1]
+            percentage = doc_texts[2]
+            query = Results(user=user_id, html=html_data, links=search, docname=docname, copiedlines=copiedlines, percentage=percentage)
             db.session.add(query)
             db.session.commit()
             return redirect(url_for('listahan'))
