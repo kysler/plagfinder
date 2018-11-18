@@ -37,7 +37,6 @@ import os.path as op
 import mammoth
 import datetime
 
-q = Queue(connection=conn)
 file_path = op.join(op.dirname(__file__), 'files')
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -116,16 +115,6 @@ def create_app(config_class=configClass):
     class PostForm(FlaskForm):
         body = CKEditorField('Body', validators=[DataRequired()])
         submit = SubmitField('Submit')
-    
-    def Scan(text):
-        user_id = current_user.username
-        html_data = text
-        soup = BeautifulSoup(html_data, "html.parser")
-        search = searchText(soup.get_text())
-        doc_texts=scan(text)
-        query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(doc_texts)[0], copiedlines='[-]'.join(doc_texts)[1], percentage=doc_texts[2])
-        db.session.add(query)
-        db.session.commit()
 
     @app.errorhandler(500)
     def handle_bad_request(e):
@@ -177,7 +166,15 @@ def create_app(config_class=configClass):
             return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines, per = per)
 
         elif form.validate_on_submit():
-            result = q.enqueue_call(Scan, args=(self,))
+            user_id = current_user.username
+            html_data = text
+            soup = BeautifulSoup(html_data, "html.parser")
+            text = soup.get_text()
+            search = searchText(text)
+            doc_texts=scan(text)
+            query = Results(user=user_id, html=html_data, links=search, docname='[-]'.join(doc_texts)[0], copiedlines='[-]'.join(doc_texts)[1], percentage=doc_texts[2])
+            db.session.add(query)
+            db.session.commit()
             return redirect(url_for('listahan'))
         
         else:
@@ -191,6 +188,7 @@ def create_app(config_class=configClass):
     def finalized(pathname):
         form = PostForm()
         if form.validate_on_submit():
+            q = Queue(connection=conn)
             result = q.enqueue_call(Scan, args=(self,))
             return redirect(url_for('listahan'))
         else:
