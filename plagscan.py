@@ -21,7 +21,6 @@ def getText(filename):
     return '\n'.join(fullText)
 
 #Main Plagiarism Scanner Function
-#Main Plagiarism Scanner Function
 def scan(textfile):
     data = tokenize.sent_tokenize(textfile)
     doclist = []
@@ -41,6 +40,9 @@ def scan(textfile):
                 copiedline = process.extractOne(item, data2)
                 stringedline = copiedline[0]
                 copiedlist.append(stringedline)
+    if total_ratio > 0:
+        total_ratio = total_ratio/counter
     copiedlist = list(OrderedDict.fromkeys(copiedlist))
     doclist = list(OrderedDict.fromkeys(doclist))
-    return doclist, copiedlist
+    totalratio = str(total_ratio)
+    return(doclist, copiedlist, totalratio)
