@@ -177,7 +177,7 @@ def create_app(config_class=configClass):
             return render_template('scan.html', form = form, content = html, links = links, docname = docname, copiedlines = copiedlines, per = per)
 
         elif form.validate_on_submit():
-            result = q.enqueue_call(Scan, form.body.data)
+            result = q.enqueue_call(Scan, args=(self,))
             return redirect(url_for('listahan'))
         
         else:
@@ -191,7 +191,7 @@ def create_app(config_class=configClass):
     def finalized(pathname):
         form = PostForm()
         if form.validate_on_submit():
-            result = q.enqueue_call(Scan, form.body.data)
+            result = q.enqueue_call(Scan, args=(self,))
             return redirect(url_for('listahan'))
         else:
             content = Results.query.filter_by(id=pathname).first()
