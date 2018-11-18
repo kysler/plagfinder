@@ -26,8 +26,9 @@ def searchText(uploaded_file):
         r = requests.get(google_url, headers=headers)
         soup = BeautifulSoup(r.text, "html.parser")
         url = soup.select('.r a')
-        urlclean = url[0]['href']
-        links.append(urlclean)
+        if url:
+            urlclean = url[0]['href']
+            links.append(urlclean)
         time.sleep(3)
     results = list(OrderedDict.fromkeys(links))[0:5]
     return '[-]'.join(results)
