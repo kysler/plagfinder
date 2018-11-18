@@ -105,7 +105,7 @@ def create_app(config_class=configClass):
         links = db.Column(db.Unicode(), server_default='')
         docname = db.Column(db.Unicode(), server_default='')
         copiedlines = db.Column(db.Unicode(), server_default='')
-        percentage = db.Column(db.Integer, server_default=0)
+        percentage = db.Column(db.Unicode(), server_default='0')
 
     # Setup Flask-User and specify the User data-model
     user_manager = UserManager(app, db, User)
