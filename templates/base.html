@@ -37,7 +37,7 @@
                 <a href="{{url_for('listahan')}}" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">{{ current_user.username or current_user.email }}</a>
               </li>
             <li class="nav-item mx-0 mx-lg-1">
-              {% if 'premium' in current %}
+              {% if '<Role 2>' in current_user.roles %}
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for ( 'testpage' ) }}">Scan</a>
               {% else %}
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url_for ( 'freepage' ) }}">Trial</a>
