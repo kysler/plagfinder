@@ -32,7 +32,7 @@ def scan(textfile):
         data2 = tokenize.sent_tokenize(getText(filename))
         ratio = round(similar(data, data2), 2)
         doc_name = filename.split('\\')[-1].split('.')[0]
-        if(ratio >= 30):
+        if(ratio >= 40):
             doclist.append(doc_name)
             counter += 1
             total_ratio += ratio
