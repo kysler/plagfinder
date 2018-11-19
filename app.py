@@ -152,7 +152,7 @@ def create_app(config_class=configClass):
         return redirect(url_for('admin.index'))
 
     @app.route('/scan', methods=[ 'POST', 'GET' ])
-    @login_required
+    @roles_required('premium')
     def testpage():
         form = PostForm()
         if request.method == 'POST' and 'files' in request.files:
