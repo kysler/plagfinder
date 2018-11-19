@@ -117,7 +117,7 @@ def create_app(config_class=configClass):
         submit = SubmitField('Submit')
         
     class TrialForm(FlaskForm):
-        body = TextField('Body', validators=[DataRequired()])
+        body = StringField('Body', validators=[DataRequired()])
         submit = SubmitField('Submit')
 
     @app.errorhandler(500)
