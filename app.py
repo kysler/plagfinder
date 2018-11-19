@@ -138,9 +138,7 @@ def create_app(config_class=configClass):
     @app.route ( '/homepage', methods=[ 'POST', 'GET' ] )
     @login_required
     def upload():
-        current = []
-        current.append(current_user.roles)
-        return render_template ('base.html', current=current)
+        return render_template ('base.html', current=current_user.roles)
 
     @app.route('/admin')
     def adminpage():
