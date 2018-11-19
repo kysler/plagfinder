@@ -190,9 +190,9 @@ def create_app(config_class=configClass):
         if form.validate_on_submit():
             data = form.body.data
             search = searchText(data)
-            return render_template('trialresult.html', links = search.split("[-]"))
+            return render_template('trialresult.html', links = search.split("[-]"), form = form)
         else:
-            return render_template('freeuser.html')
+            return render_template('freeuser.html', form = form)
     
     @app.route('/scanner/<int:pathname>')
     @login_required
