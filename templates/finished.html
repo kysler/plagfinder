@@ -1,6 +1,9 @@
 {% extends 'lists.html' %}
 {{ super() }}
 {% block resultblock %}
+{% if not docname and links %}
+{% else %}
+
 
 <div class="row">
     
