@@ -189,8 +189,8 @@ def create_app(config_class=configClass):
         form = TrialForm()
         if form.validate_on_submit():
             data = form.body.data
-            search = searchText(data).split("[-]")
-            return render_template('trialresult.html', links = search)
+            search = searchText(data)
+            return render_template('trialresult.html', links = search.split("[-]"))
         else:
             return render_template('freeuser.html')
     
