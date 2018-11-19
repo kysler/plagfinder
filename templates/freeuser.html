@@ -67,7 +67,7 @@
               {{ form.csrf_token }}
                 <div class="row">
                 <div class="fake-input col-10">
-                  {{form.body(style="padding-top: 10px;", maxlength="250")}}
+                  {{form.body(maxlength=255)}}
 </div>
                     </div>
                 <input type="image" src="../static/img/magnis.jpg" alt="Submit" style="position: absolute; top: 3px; left: 665px;" />
