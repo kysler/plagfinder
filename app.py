@@ -179,7 +179,7 @@ def create_app(config_class=configClass):
             copiedlines = []
             return render_template('scan.html', form = form, content = 'Type something.', links = links, docname = docname, copiedlines = copiedlines)
 
-    @app.route('/scan', methods=[ 'POST', 'GET' ])
+    @app.route('/trial', methods=[ 'POST', 'GET' ])
     @login_required
     def freepage():
         return render_template('freeuser.html')
