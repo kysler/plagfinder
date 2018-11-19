@@ -139,7 +139,7 @@ def create_app(config_class=configClass):
     @login_required
     def upload():
         current = []
-        current.append(curren_user.roles)
+        current.append(current_user.roles)
         print(current)
         return render_template ( 'base.html', current=current)
 
