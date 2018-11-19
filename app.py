@@ -140,7 +140,7 @@ def create_app(config_class=configClass):
     def upload():
         current = []
         current.append(current_user.roles)
-        return render_template ('base.html')
+        return render_template ('base.html', current=current)
 
     @app.route('/admin')
     def adminpage():
