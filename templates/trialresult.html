@@ -1,0 +1,24 @@
+{% extends 'freeuser.html' %}
+{{ super() }}
+{% block resultblock %}
+{% if not links %}
+{% else %}
+
+<div class="row">
+          <div class="links col-4" style="margin-left: 1.7%;">
+              <h4>Website Links</h4>
+              {% if not links or "" %}
+              <h6>Nothing found</h6>
+              {% else %}
+                <ol>
+                {% for items in links %}
+                <li><a href="{{items}}">{{items}}</a></li>
+                {% endfor %}
+                </ol>
+              {% endif %}
+            </div>
+{% endif %}
+    <script src="../static/js/plugin.js"></script>
+    <script src="../static/js/script.js"></script>
+</div>
+{% endblock %}
