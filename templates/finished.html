@@ -10,13 +10,22 @@
     <center><h2 style="margin-bottom: 15%; font-size: 35px;">Result:</h2>
 <div>
     
-        <div class="my-progress-bar" data-percent="{{per}}"><h6>Plagiarized Contents</h6></div>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var progress_circle = $(".my-progress-bar").gmpc({
-                percent:50
-});
-        }) </script>
+        <div id="test-circle" data-percent="{{per}}">></div><h6>Plagiarized Contents</h6
+    <script>
+    $( document ).ready(function() { // 6,32 5,38 2,34
+        $("#test-circle").circliful({
+            animation: 1,
+            animationStep: 5,
+            animateInView: true,
+            foregroundBorderWidth: 15,
+            backgroundBorderWidth: 15,
+            percent: 38,
+            textSize: 28,
+            textStyle: 'font-size: 12px;',
+            textColor: '#666',
+        });
+    });
+</script>
         </div>
 </center>
     </div>
