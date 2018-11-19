@@ -677,6 +677,3 @@ img {vertical-align: middle;}
 .fake-input { position: relative; width: 100%; }
 .fake-input input { border:none: background:#fff; display:block; width: 100%; box-sizing: border-box }
 
-#hide {
-    display: none
-}
