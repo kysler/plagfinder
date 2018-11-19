@@ -115,6 +115,10 @@ def create_app(config_class=configClass):
     class PostForm(FlaskForm):
         body = CKEditorField('Body', validators=[DataRequired()])
         submit = SubmitField('Submit')
+        
+    class TrialForm(FlaskForm):
+        body = TextField('Body', validators=[DataRequired()])
+        submit = SubmitField('Submit')
 
     @app.errorhandler(500)
     def handle_bad_request(e):
@@ -182,7 +186,13 @@ def create_app(config_class=configClass):
     @app.route('/trial', methods=[ 'POST', 'GET' ])
     @login_required
     def freepage():
-        return render_template('freeuser.html')
+        form = TrialForm()
+        if form.validate_on_submit():
+            data = form.body.data
+            search = searchText(data).split("[-]")
+            return render_template('trialresult.html', links = search)
+        else:
+            return render_template('freeuser.html')
     
     @app.route('/scanner/<int:pathname>')
     @login_required
