@@ -138,14 +138,7 @@ def create_app(config_class=configClass):
     @app.route ( '/homepage', methods=[ 'POST', 'GET' ] )
     @login_required
     def upload():
-        form = PostForm()
-        if request.method == 'POST' and 'files' in request.files:
-            filename = documents.save ( request.files[ 'files' ] )
-            output = mammoth.convert_to_html('tmp/uploads/' + filename)
-            html = output.value
-            return render_template('member.html', form=form, content=html)
-        else:
-            return render_template ( 'member.html', form=form, content='Type or upload.')
+        return render_template ( 'member.html', current=current_user.roles)
 
     @app.route('/admin')
     def adminpage():
