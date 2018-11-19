@@ -63,10 +63,11 @@
 
                     
           <div class="col-9";>
-            <form method="post"  >
+            <form method="post" action={{url_for('')}}>
+              {{ form.csrf_token }}
                 <div class="row">
                 <div class="fake-input col-10">
-            <input name="Body" type="text" style="padding-top: 10px;" maxlength="250" />    
+                  {{form.body(style="padding-top: 10px;" maxlength="250")}}
 </div>
                     </div>
                 <input type="image" src="../static/img/magnis.jpg" alt="Submit" style="position: absolute; top: 3px; left: 665px;" />
