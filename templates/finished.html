@@ -1,8 +1,6 @@
 {% extends 'lists.html' %}
 {{ super() }}
 {% block resultblock %}
-{% if not docname and links %}
-{% else %}
 
 <div class="row">
     
@@ -10,7 +8,7 @@
     <center><h2 style="margin-bottom: 15%;">Result:</h2>
 <div>
     <h6>Plagiarized Contents</h6>
-        <div class="my-progress-bar" data-percent="{{per}}"></div>
+        <div class="my-progress-bar" data-percent=""></div>
     <script type="text/javascript">
         $(document).ready(function(){
             var progress_circle = $(".my-progress-bar").gmpc({
@@ -22,33 +20,31 @@
     </div>
           <div class="links col-4" style="margin-left: 1.7%;">
               <h4>Website Links</h4>
-              {% if not links %}
+   
               <h6>Nothing found</h6>
-              {% else %}
+     
                 <ol>
-                {% for items in links %}
-                <li><a href="{{items}}">{{items}}</a></li>
-                {% endfor %}
+ 
+                <li><a href=""></a></li>
+
                 </ol>
-              {% endif %}
+
             </div>
 
           <!---NCST DATABASE---->
             <div class="links col-4"  style="margin-left: 2%;">
                 <h4>NCST Database links</h4>
-                {% if not docname %}
+
               <h6>Nothing found</h6>
-              {% else %}
+
             <dl>
-                {% for name in docname %}
-                    <dt>{{name}}</dt>
-                {% for copied in copiedlines %}
-                    <dd>{{copied}}</dd>
-                {% endfor %}
-                {% endfor %}
-              {% endif %}
+
+                    <dt></dt>
+           
+                    <dd></dd>
+
             </dl>
             </div>
-{% endif %}
+
 </div>
 {% endblock %}
