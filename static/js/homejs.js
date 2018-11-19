@@ -16,11 +16,6 @@ $(document).ready(function(){
         e.preventDefault();
         $("#display1:hidden").trigger('click');
     });
-	$("#open").on('click', function(e){
-        e.preventDefault();
-        $("#hide:hidden").trigger('click');
-    });
-
 });
 
 var slideIndex = 1;
