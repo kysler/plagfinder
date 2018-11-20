@@ -29,22 +29,7 @@
         </div>
 </center>
     </div>
-    <!----eto lng inherit mo--->
-          <div class="links col-4" style="margin-left: 1.7%;">
-              <h4>Website Links</h4>
-              {% if not links or "" %}
-              <h6>Nothing found</h6>
-              {% else %}
-                <ol>
-                {% for items in links %}
-                <li><a href="{{items}}">{{items}}</a></li>
-                {% endfor %}
-                </ol>
-              {% endif %}
-            </div>
-<!---hanggang dito-->
-<!----ayusin mo rin ung mga nav tab sa base dpat naka if else din ung username dahil nanjan ung premium natin-->
-          <!---NCST DATABASE---->
+    <!---NCST DATABASE---->
             <div class="links col-4"  style="margin-left: 2%;">
                 <h4>NCST Database links</h4>
                 {% if not docname or "" %}
@@ -60,6 +45,21 @@
               {% endif %}
             </dl>
             </div>
+    <!----eto lng inherit mo--->
+          <div class="links col-4" style="margin-left: 1.7%;">
+              <h4>Website Links</h4>
+              {% if not links or "" %}
+              <h6>Nothing found</h6>
+              {% else %}
+                <ol>
+                {% for items in links %}
+                <li><a href="{{items}}">{{items}}</a></li>
+                {% endfor %}
+                </ol>
+              {% endif %}
+            </div>
+<!---hanggang dito-->
+<!----ayusin mo rin ung mga nav tab sa base dpat naka if else din ung username dahil nanjan ung premium natin-->
 {% endif %}
     <script src="../static/js/plugin.js"></script>
     <script src="../static/js/script.js"></script>
