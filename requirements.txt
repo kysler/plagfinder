@@ -31,7 +31,7 @@ blinker==1.4
 certifi==2018.4.16
 cffi==1.11.5
 chardet==3.0.4
-cryptography==2.3
+cryptography==3.2
 dominate==2.3.1
 future==0.16.0
 fuzzywuzzy==0.16.0
