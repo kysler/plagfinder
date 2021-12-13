@@ -37,7 +37,7 @@ future==0.16.0
 fuzzywuzzy==0.16.0
 idna==2.7
 itsdangerous==0.24
-lxml==4.2.4
+lxml==4.6.5
 mammoth==1.4.6
 MarkupSafe==1.0
 cobble==0.1.3
